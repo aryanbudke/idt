@@ -1,0 +1,456 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+enum Role {
+  ADMIN
+  FACULTY
+  STUDENT
+}
+
+enum StudentStatus {
+  ACTIVE
+  GRADUATED
+  SUSPENDED
+}
+
+enum FacultyStatus {
+  ACTIVE
+  ON_LEAVE
+  RESIGNED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum ClassroomType {
+  CLASSROOM
+  LAB
+}
+
+enum ExamType {
+  IA1
+  IA2
+  ASSIGNMENT
+  LAB
+  SEMESTER_END
+}
+
+enum ExamStatus {
+  SCHEDULED
+  ONGOING
+  COMPLETED
+}
+
+enum AudienceType {
+  ALL
+  STUDENT
+  FACULTY
+  ADMIN
+}
+
+model Organization {
+  id            String         @id @default(uuid())
+  name          String
+  code          String         @unique
+  email         String
+  phone         String
+  website       String?
+  logoUrl       String?
+  status        Status         @default(ACTIVE)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  campuses      Campus[]
+  announcements Announcement[]
+  events        Event[]
+}
+
+model Campus {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  name           String
+  address        String
+  city           String
+  state          String
+  country        String
+  postalCode     String
+  phone          String
+  email          String
+  status         Status       @default(ACTIVE)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  departments    Department[]
+  classrooms     Classroom[]
+
+  @@index([organizationId])
+}
+
+model Department {
+  id           String            @id @default(uuid())
+  campusId     String
+  campus       Campus            @relation(fields: [campusId], references: [id])
+  name         String
+  code         String            @unique
+  hodFacultyId String?
+  hod          Faculty?          @relation("DepartmentHOD", fields: [hodFacultyId], references: [id])
+  description  String?
+  status       Status            @default(ACTIVE)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  programs     AcademicProgram[]
+  facultyMembers Faculty[]       @relation("DepartmentMembers")
+  students     Student[]
+
+  @@index([campusId])
+  @@index([hodFacultyId])
+}
+
+model AcademicProgram {
+  id             String       @id @default(uuid())
+  departmentId   String
+  department     Department   @relation(fields: [departmentId], references: [id])
+  name           String
+  code           String       @unique
+  durationYears  Int
+  totalSemesters Int
+  description    String?
+  status         Status       @default(ACTIVE)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  semesters      Semester[]
+  students       Student[]
+
+  @@index([departmentId])
+}
+
+model Semester {
+  id                 String               @id @default(uuid())
+  programId          String
+  program            AcademicProgram      @relation(fields: [programId], references: [id])
+  semesterNumber     Int
+  academicYear       String
+  status             Status               @default(ACTIVE)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  sections           Section[]
+  subjects           Subject[]
+  students           Student[]
+  teachingAssignments TeachingAssignment[]
+
+  @@index([programId])
+}
+
+model Section {
+  id                 String               @id @default(uuid())
+  semesterId         String
+  semester           Semester             @relation(fields: [semesterId], references: [id])
+  name               String
+  capacity           Int
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  students           Student[]
+  teachingAssignments TeachingAssignment[]
+
+  @@index([semesterId])
+}
+
+model Subject {
+  id                 String               @id @default(uuid())
+  semesterId         String
+  semester           Semester             @relation(fields: [semesterId], references: [id])
+  code               String               @unique
+  name               String
+  credits            Int
+  theoryMarks        Int
+  practicalMarks     Int
+  status             Status               @default(ACTIVE)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  teachingAssignments TeachingAssignment[]
+
+  @@index([semesterId])
+}
+
+model User {
+  id                   String         @id @default(uuid())
+  clerkUserId          String         @unique
+  email                String         @unique
+  role                 Role
+  lastLoginAt          DateTime?
+  isActive             Boolean        @default(true)
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  studentProfile       Student?
+  facultyProfile       Faculty?
+  adminProfile         Admin?
+  createdAnnouncements Announcement[]
+}
+
+model Student {
+  id               String             @id @default(uuid())
+  userId           String             @unique
+  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  studentId        String             @unique
+  firstName        String
+  lastName         String
+  email            String
+  phone            String
+  profileImageUrl  String?
+  gender           String
+  dateOfBirth      DateTime
+  emergencyContact String
+  batch            Int
+  departmentId     String
+  department       Department         @relation(fields: [departmentId], references: [id])
+  programId        String
+  program          AcademicProgram    @relation(fields: [programId], references: [id])
+  semesterId       String
+  semester         Semester           @relation(fields: [semesterId], references: [id])
+  sectionId        String
+  section          Section            @relation(fields: [sectionId], references: [id])
+  status           StudentStatus      @default(ACTIVE)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  attendance       Attendance[]
+  assessments      StudentAssessment[]
+
+  @@index([userId])
+  @@index([departmentId])
+  @@index([programId])
+  @@index([semesterId])
+  @@index([sectionId])
+}
+
+model Faculty {
+  id                 String               @id @default(uuid())
+  userId             String               @unique
+  user               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  facultyId          String               @unique
+  firstName          String
+  lastName           String
+  email              String
+  phone              String
+  profileImageUrl    String?
+  designation        String
+  joiningDate        DateTime
+  departmentId       String
+  department         Department           @relation("DepartmentMembers", fields: [departmentId], references: [id])
+  status             FacultyStatus        @default(ACTIVE)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  teachingAssignments TeachingAssignment[]
+  hodOfDepartments   Department[]         @relation("DepartmentHOD")
+
+  @@index([userId])
+  @@index([departmentId])
+}
+
+model Admin {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  employeeCode    String   @unique
+  firstName       String
+  lastName        String
+  email           String
+  phone           String
+  profileImageUrl String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model TeachingAssignment {
+  id           String       @id @default(uuid())
+  facultyId    String
+  faculty      Faculty      @relation(fields: [facultyId], references: [id])
+  subjectId    String
+  subject      Subject      @relation(fields: [subjectId], references: [id])
+  semesterId   String
+  semester     Semester     @relation(fields: [semesterId], references: [id])
+  sectionId    String
+  section      Section      @relation(fields: [sectionId], references: [id])
+  academicYear String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  attendance   Attendance[]
+  timetable    Timetable[]
+  exams        Exam[]
+  assignments  Assignment[]
+
+  @@index([facultyId])
+  @@index([subjectId])
+  @@index([semesterId])
+  @@index([sectionId])
+}
+
+model Attendance {
+  id                   String             @id @default(uuid())
+  teachingAssignmentId String
+  teachingAssignment   TeachingAssignment @relation(fields: [teachingAssignmentId], references: [id])
+  studentId            String
+  student              Student            @relation(fields: [studentId], references: [id])
+  attendanceDate       DateTime
+  status               AttendanceStatus
+  remarks              String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  @@unique([studentId, teachingAssignmentId, attendanceDate])
+  @@index([teachingAssignmentId])
+  @@index([studentId])
+  @@index([attendanceDate])
+}
+
+model Classroom {
+  id        String        @id @default(uuid())
+  campusId  String
+  campus    Campus        @relation(fields: [campusId], references: [id])
+  roomCode  String
+  building  String
+  floor     Int
+  capacity  Int
+  roomType  ClassroomType
+  status    Status        @default(ACTIVE)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  timetables Timetable[]
+  exams      Exam[]
+
+  @@unique([campusId, roomCode])
+  @@index([campusId])
+}
+
+model Timetable {
+  id                   String             @id @default(uuid())
+  teachingAssignmentId String
+  teachingAssignment   TeachingAssignment @relation(fields: [teachingAssignmentId], references: [id])
+  classroomId          String
+  classroom            Classroom          @relation(fields: [classroomId], references: [id])
+  dayOfWeek            DayOfWeek
+  startTime            String
+  endTime              String
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  @@index([teachingAssignmentId])
+  @@index([classroomId])
+}
+
+model Exam {
+  id                   String             @id @default(uuid())
+  teachingAssignmentId String
+  teachingAssignment   TeachingAssignment @relation(fields: [teachingAssignmentId], references: [id])
+  examType             ExamType
+  title                String
+  examDate             DateTime
+  startTime            String
+  endTime              String
+  totalMarks           Int
+  classroomId          String?
+  classroom            Classroom?         @relation(fields: [classroomId], references: [id])
+  status               ExamStatus         @default(SCHEDULED)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  assessments          StudentAssessment[]
+
+  @@index([teachingAssignmentId])
+  @@index([classroomId])
+}
+
+model StudentAssessment {
+  id            String   @id @default(uuid())
+  examId        String
+  exam          Exam     @relation(fields: [examId], references: [id])
+  studentId     String
+  student       Student  @relation(fields: [studentId], references: [id])
+  marksObtained Decimal
+  percentage    Decimal
+  letterGrade   String
+  gradePoints   Decimal
+  remarks       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([studentId, examId])
+  @@index([examId])
+  @@index([studentId])
+}
+
+model Assignment {
+  id                   String             @id @default(uuid())
+  teachingAssignmentId String
+  teachingAssignment   TeachingAssignment @relation(fields: [teachingAssignmentId], references: [id])
+  title                String
+  description          String
+  uploadDate           DateTime
+  deadline             DateTime
+  status               Status             @default(ACTIVE)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  @@index([teachingAssignmentId])
+}
+
+model Announcement {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  title          String
+  description    String
+  audience       AudienceType
+  publishDate    DateTime
+  expiryDate     DateTime
+  createdBy      String
+  author         User         @relation(fields: [createdBy], references: [id])
+  status         Status       @default(ACTIVE)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@index([createdBy])
+}
+
+model Event {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  title          String
+  description    String
+  category       String
+  venue          String
+  eventDate      DateTime
+  startTime      String
+  endTime        String
+  organizer      String
+  status         Status       @default(ACTIVE)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+}
