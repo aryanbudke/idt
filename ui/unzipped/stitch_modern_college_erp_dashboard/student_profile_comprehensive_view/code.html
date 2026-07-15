@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Profile | EduSaaS ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcc6",
+                    "surface-container-low": "#eff4ff",
+                    "on-primary-fixed": "#001a42",
+                    "on-primary": "#ffffff",
+                    "outline": "#727785",
+                    "inverse-surface": "#213145",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#fefcff",
+                    "on-primary-fixed-variant": "#004395",
+                    "secondary-container": "#dae2fd",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#dce9ff",
+                    "surface-container": "#e5eeff",
+                    "surface": "#f8f9ff",
+                    "outline-variant": "#c2c6d6",
+                    "on-background": "#0b1c30",
+                    "surface-container-highest": "#d3e4fe",
+                    "inverse-primary": "#adc6ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "background": "#f8f9ff",
+                    "secondary": "#565e74",
+                    "tertiary": "#924700",
+                    "surface-dim": "#cbdbf5",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-variant": "#d3e4fe",
+                    "primary-container": "#2170e4",
+                    "on-secondary-container": "#5c647a",
+                    "surface-tint": "#005ac2",
+                    "tertiary-container": "#b75b00",
+                    "on-tertiary-container": "#fffbff",
+                    "on-tertiary-fixed": "#311400",
+                    "on-secondary-fixed": "#131b2e",
+                    "on-surface-variant": "#424754",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#d8e2ff",
+                    "primary": "#0058be",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "on-surface": "#0b1c30",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "48px",
+                    "unit": "4px",
+                    "container-padding": "32px",
+                    "gutter": "24px",
+                    "element-gap": "12px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h2": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center h-16 px-container-padding w-full">
+<div class="flex items-center gap-4">
+<span class="font-h3 text-h3 font-bold text-primary">EduSaaS ERP</span>
+<div class="hidden md:flex ml-8 gap-6 h-full items-center">
+<a class="font-body-base text-body-base text-on-secondary-fixed-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-body-base text-body-base text-primary font-bold border-b-2 border-primary py-4" href="#">Student Directory</a>
+<a class="font-body-base text-body-base text-on-secondary-fixed-variant hover:text-primary transition-colors" href="#">Academics</a>
+</div>
+</div>
+<div class="flex items-center gap-element-gap">
+<div class="relative group hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg text-label-md w-64 focus:ring-2 focus:ring-primary transition-all" placeholder="Global Search..." type="text"/>
+</div>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors relative">
+<span class="material-symbols-outlined text-secondary">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined text-secondary">chat_spark</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<img class="h-10 w-10 rounded-full border-2 border-primary-container object-cover cursor-pointer" data-alt="A professional close-up studio portrait of a university administrative staff member, soft high-key lighting, bright minimalist office background with a subtle blue tint consistent with high-end SaaS dashboards." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWEsf6Fp1i_x5my7j8fIvqxh4he_flZefUYkQRig-D-0p09i1Yogd1fr6iyDetxfuLj-Zhf3l57rhK8gotNYCwKGOTeXEw7VFK0VBrt-_0k6uMuHKIjT3PElsc7WHJ9EF5JFzOAQ_0QAfAiyJBZWD-MQTSQ7mqbYlSGbDkBJNRDPxpn0iLqrRD0IsWSZ-R5jipDEZWq5Yc8EXyUn6PNCfvXUtc9LplQujo09bqK0revfQYqBehRA2F"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-72 bg-surface-container-lowest border-r border-outline-variant hidden md:flex flex-col py-4 overflow-y-auto">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 p-2 bg-surface-container-low rounded-xl">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">school</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Administration</p>
+<p class="text-[10px] text-secondary uppercase tracking-wider">AY 2024-25</p>
+</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<div class="flex items-center gap-element-gap p-3 mx-2 my-1 hover:bg-surface-container transition-all cursor-pointer text-secondary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</div>
+<div class="flex items-center gap-element-gap p-3 mx-2 my-1 hover:bg-surface-container transition-all cursor-pointer text-secondary">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Academic Calendar</span>
+</div>
+<div class="flex items-center gap-element-gap p-3 mx-2 my-1 hover:bg-surface-container transition-all cursor-pointer text-secondary">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-md text-label-md">Event Management</span>
+</div>
+<div class="flex items-center gap-element-gap p-3 mx-2 my-1 bg-secondary-container text-on-secondary-fixed font-semibold rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Student Directory</span>
+</div>
+<div class="flex items-center gap-element-gap p-3 mx-2 my-1 hover:bg-surface-container transition-all cursor-pointer text-secondary">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-md text-label-md">Faculty Records</span>
+</div>
+<div class="flex items-center gap-element-gap p-3 mx-2 my-1 hover:bg-surface-container transition-all cursor-pointer text-secondary">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="font-label-md text-label-md">System Settings</span>
+</div>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant">
+<div class="px-6 mb-4">
+<button class="w-full bg-primary text-on-primary py-2.5 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    Quick Actions
+                </button>
+</div>
+<div class="flex items-center gap-element-gap p-3 mx-2 my-1 hover:bg-surface-container transition-all cursor-pointer text-secondary">
+<span class="material-symbols-outlined">shield_lock</span>
+<span class="font-label-md text-label-md">Security</span>
+</div>
+<div class="flex items-center gap-element-gap p-3 mx-2 my-1 hover:bg-surface-container transition-all cursor-pointer text-secondary">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md">Support</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-72 mt-16 p-container-padding min-h-screen">
+<!-- Profile Header Section -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden mb-gutter shadow-sm">
+<div class="h-32 bg-gradient-to-r from-primary to-primary-container relative">
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+</div>
+<div class="px-8 pb-8 flex flex-col md:flex-row gap-8 items-end -mt-12">
+<div class="relative group">
+<img class="w-40 h-40 rounded-2xl border-4 border-surface-container-lowest shadow-lg object-cover" data-alt="A professional studio headshot of a diverse 20-year-old female university student, confident expression, soft natural lighting, high-resolution aesthetic, wearing a modern academic sweatshirt against a clean white backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_yGXxBlFyNJtHlsX38A9Zy0jPAly5_YHzAWq16XrvWR9D40kWH07WzXs8WX82650llD8NjmEHLEowAztvCoKvyzA3RmidqwQRNwlZFZUY_fFRGht3g6WZbbtIMwxhYPGD5mZxBMI4eE5ci2hMxzVZXeBU849X7z-iIbMPEAIfbG_-GtVE_JlN23Vle0-O5sv69c1a3A7VOx1LznuWlvaMCKztBjhjHoRyhAtZF8GGqzm5azRfl7OZ"/>
+<button class="absolute bottom-2 right-2 bg-primary text-on-primary p-2 rounded-lg shadow-md hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+</div>
+<div class="flex-grow pb-2">
+<div class="flex items-center gap-3 mb-1">
+<h1 class="font-h1 text-h1 text-on-surface">Alexandria Sterling</h1>
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-label-sm font-bold flex items-center gap-1">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            ACTIVE
+                        </span>
+</div>
+<p class="font-body-lg text-body-lg text-secondary mb-4">Sophomore • Bachelor of Computer Science • ID: EDU-2024-8892</p>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary">school</span>
+<span class="font-label-md text-label-md text-on-surface">Major: AI & Robotics</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-label-md text-label-md text-on-surface">Campus: North Wing</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4 mb-2">
+<div class="text-center px-6 border-r border-outline-variant">
+<p class="text-h3 font-h3 text-primary">3.92</p>
+<p class="text-label-sm text-secondary uppercase font-bold tracking-tighter">Current GPA</p>
+</div>
+<div class="text-center px-6">
+<p class="text-h3 font-h3 text-tertiary">96.4%</p>
+<p class="text-label-sm text-secondary uppercase font-bold tracking-tighter">Attendance</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bento-grid">
+<!-- Left Column: Personal & Contact -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Personal Info Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-h3 text-h3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person</span>
+                            Personal Information
+                        </h2>
+<button class="text-primary hover:bg-surface-container p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div class="space-y-4">
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-1">Full Name</p>
+<p class="font-body-base text-on-surface">Alexandria Marie Sterling</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-1">Date of Birth</p>
+<p class="font-body-base text-on-surface">May 14, 2004</p>
+</div>
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-1">Gender</p>
+<p class="font-body-base text-on-surface">Female</p>
+</div>
+</div>
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-1">Email Address</p>
+<p class="font-body-base text-on-surface flex items-center gap-2">
+                                a.sterling@university.edu
+                                <span class="material-symbols-outlined text-[16px] text-green-500">verified</span>
+</p>
+</div>
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-1">Phone Number</p>
+<p class="font-body-base text-on-surface">+1 (555) 012-3456</p>
+</div>
+<div>
+<p class="text-label-sm text-secondary uppercase tracking-wider mb-1">Current Address</p>
+<p class="font-body-base text-on-surface leading-relaxed">882 University Drive, Apt 4B, Silicon Valley, CA 94025</p>
+</div>
+</div>
+</section>
+<!-- Parent/Guardian Info -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<h2 class="font-h3 text-h3 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">family_history</span>
+                        Parent Details
+                    </h2>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">Robert Sterling</p>
+<p class="text-label-sm text-secondary">Father • Financial Advisor</p>
+<p class="text-label-sm text-primary mt-1">+1 (555) 098-7654</p>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-secondary">call</span>
+</button>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">Elena Sterling</p>
+<p class="text-label-sm text-secondary">Mother • Pediatrician</p>
+<p class="text-label-sm text-primary mt-1">e.sterling@healthmail.com</p>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-secondary">mail</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Middle Column: Performance & Activity -->
+<div class="col-span-12 lg:col-span-5 space-y-gutter">
+<!-- Performance Charts Summary -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-h3 text-h3">Performance Trends</h2>
+<select class="bg-surface-container-low border-none rounded-lg text-label-sm font-semibold text-primary px-3 py-1 outline-none">
+<option>Last Semester</option>
+<option>Academic Year</option>
+</select>
+</div>
+<div class="flex gap-4 h-48 items-end justify-between px-2 mb-4">
+<!-- Bar Chart Placeholder (CSS Visuals) -->
+<div class="w-8 bg-primary/20 rounded-t-lg relative group cursor-pointer" style="height: 70%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-on-primary text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">7.2</div>
+<p class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-label-sm text-secondary">CS101</p>
+</div>
+<div class="w-8 bg-primary/40 rounded-t-lg relative group cursor-pointer" style="height: 85%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-on-primary text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">8.5</div>
+<p class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-label-sm text-secondary">MATH</p>
+</div>
+<div class="w-8 bg-primary rounded-t-lg relative group cursor-pointer" style="height: 95%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-on-primary text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">9.8</div>
+<p class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-label-sm text-secondary">AI</p>
+</div>
+<div class="w-8 bg-primary/60 rounded-t-lg relative group cursor-pointer" style="height: 60%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-on-primary text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">6.0</div>
+<p class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-label-sm text-secondary">ENG</p>
+</div>
+<div class="w-8 bg-primary/80 rounded-t-lg relative group cursor-pointer" style="height: 88%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-on-primary text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">8.8</div>
+<p class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-label-sm text-secondary">PHY</p>
+</div>
+</div>
+<p class="text-label-sm text-secondary mt-8 text-center">Subject-wise Score Intensity Index</p>
+</section>
+<!-- Activity Timeline -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<h2 class="font-h3 text-h3 mb-6">Timeline of Activities</h2>
+<div class="space-y-6 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-px before:bg-outline-variant">
+<div class="relative pl-10">
+<span class="absolute left-0 top-1 w-6 h-6 bg-green-500 text-on-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant">
+<p class="text-label-sm text-secondary mb-1">Today, 09:45 AM</p>
+<p class="font-label-md text-label-md text-on-surface">Physics Assignment Submitted</p>
+<p class="text-body-sm text-secondary mt-1">Topic: "Quantum Mechanics & Wave Theory"</p>
+</div>
+</div>
+<div class="relative pl-10">
+<span class="absolute left-0 top-1 w-6 h-6 bg-primary text-on-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">event</span>
+</span>
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant">
+<p class="text-label-sm text-secondary mb-1">Oct 12, 2024</p>
+<p class="font-label-md text-label-md text-on-surface">Registered for AI Summit 2025</p>
+<p class="text-body-sm text-secondary mt-1">Status: Confirmed • Payment: Processed</p>
+</div>
+</div>
+<div class="relative pl-10">
+<span class="absolute left-0 top-1 w-6 h-6 bg-tertiary text-on-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">grade</span>
+</span>
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant">
+<p class="text-label-sm text-secondary mb-1">Oct 10, 2024</p>
+<p class="font-label-md text-label-md text-on-surface">Grade Published: Mathematics III</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="px-2 py-0.5 bg-tertiary-fixed text-tertiary rounded text-[12px] font-bold">Grade A+</span>
+<span class="text-secondary text-[12px]">Score: 94/100</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Documents & Quick Stats -->
+<div class="col-span-12 lg:col-span-3 space-y-gutter">
+<!-- Attendance Summary Mini-Chart -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<h2 class="font-label-md text-label-md uppercase tracking-widest text-secondary mb-4">Quick Attendance</h2>
+<div class="flex items-center gap-6">
+<div class="relative w-24 h-24">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-tertiary" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="25" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-h3 font-h3">96%</span>
+</div>
+</div>
+<div class="space-y-1">
+<p class="text-label-sm text-secondary">Present: <span class="text-on-surface font-bold">142 Days</span></p>
+<p class="text-label-sm text-secondary">Absent: <span class="text-error font-bold">4 Days</span></p>
+<p class="text-label-sm text-secondary">Leave: <span class="text-secondary font-bold">2 Days</span></p>
+</div>
+</div>
+</section>
+<!-- Documents Section -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-h3 text-h3">Documents</h2>
+<button class="bg-surface-container-low p-2 rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+</button>
+</div>
+<div class="space-y-3">
+<div class="p-3 border border-outline-variant rounded-lg flex items-center justify-between group hover:border-primary transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-red-500">picture_as_pdf</span>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Admissions_Form.pdf</p>
+<p class="text-[10px] text-secondary">Verified • 2.4 MB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg flex items-center justify-between group hover:border-primary transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-500">description</span>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Official_Transcript.doc</p>
+<p class="text-[10px] text-secondary">Semester 1 • 1.1 MB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg flex items-center justify-between group hover:border-primary transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">medical_services</span>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Health_Certificate.pdf</p>
+<p class="text-[10px] text-secondary">Aug 2024 • 0.8 MB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</div>
+</div>
+<button class="w-full mt-4 text-center py-2 text-label-sm font-bold text-primary hover:underline">View All 12 Documents</button>
+</section>
+<!-- Medical/Emergency Info Glass Card -->
+<section class="bg-error-container/20 border border-error/20 rounded-xl p-6 glass-effect shadow-sm">
+<h2 class="font-label-md text-label-md uppercase tracking-widest text-error mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">emergency</span>
+                        Emergency Info
+                    </h2>
+<div class="space-y-3">
+<div class="flex justify-between">
+<span class="text-label-sm text-secondary">Blood Group</span>
+<span class="text-label-sm font-bold text-on-surface">O+ Positive</span>
+</div>
+<div class="flex justify-between">
+<span class="text-label-sm text-secondary">Allergies</span>
+<span class="text-label-sm font-bold text-on-surface">Penicillin, Peanuts</span>
+</div>
+<div class="mt-4 p-3 bg-white/50 rounded-lg">
+<p class="text-[10px] uppercase text-secondary font-bold mb-1">Primary Hospital</p>
+<p class="text-label-sm text-on-surface">St. Jude Medical Center</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- FAB Action (Contextual Suppression Logic applied, but kept for demo of interactivity if needed on a profile view) -->
+<div class="fixed bottom-8 right-8 z-50 flex flex-col gap-4">
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group relative">
+<span class="material-symbols-outlined">print</span>
+<span class="absolute right-16 bg-on-surface text-on-primary px-3 py-1 rounded text-label-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Print ID Card</span>
+</button>
+</div>
+<script>
+        // Micro-interaction: Sidebar highlight simulation
+        document.querySelectorAll('nav div').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('nav div').forEach(i => i.classList.remove('bg-secondary-container', 'text-on-secondary-fixed', 'font-semibold'));
+                document.querySelectorAll('nav div').forEach(i => i.classList.add('text-secondary'));
+                item.classList.add('bg-secondary-container', 'text-on-secondary-fixed', 'font-semibold');
+                item.classList.remove('text-secondary');
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[placeholder="Global Search..."]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.classList.add('w-80');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.classList.remove('w-80');
+        });
+    </script>
+</body></html>

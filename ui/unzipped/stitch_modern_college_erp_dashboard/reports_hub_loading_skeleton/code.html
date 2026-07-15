@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports &amp; Analytics Hub - Loading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#424754",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-primary-fixed": "#001a42",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "secondary-container": "#dae2fd",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#924700",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "surface-variant": "#d3e4fe",
+                    "secondary-fixed": "#dae2fd",
+                    "on-background": "#0b1c30",
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-container": "#e5eeff",
+                    "outline-variant": "#c2c6d6",
+                    "on-tertiary-container": "#fffbff",
+                    "primary": "#0058be",
+                    "surface-container-low": "#eff4ff",
+                    "on-secondary-container": "#5c647a",
+                    "background": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#213145",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed": "#311400",
+                    "primary-container": "#2170e4",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#b75b00",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005ac2",
+                    "outline": "#727785",
+                    "surface": "#f8f9ff",
+                    "secondary": "#565e74",
+                    "inverse-primary": "#adc6ff",
+                    "surface-bright": "#f8f9ff",
+                    "on-surface": "#0b1c30",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-container": "#fefcff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "tertiary-fixed": "#ffdcc6",
+                    "surface-dim": "#cbdbf5",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "48px",
+                    "gutter": "24px",
+                    "container-padding": "32px",
+                    "unit": "4px",
+                    "element-gap": "12px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @keyframes skeleton-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .animate-skeleton {
+            animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9ff;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 overflow-y-auto bg-surface-container-low dark:bg-on-background border-r border-outline-variant dark:border-outline flex flex-col p-gutter z-50">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">domain</span>
+</div>
+<div>
+<h1 class="text-h3 font-h3 font-bold text-primary dark:text-primary-fixed">EduCore ERP</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant">SaaS Admin Portal</p>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md font-label-md">Students</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-label-md font-label-md">Faculty</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="text-label-md font-label-md">Departments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="text-label-md font-label-md">Marks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-label-md font-label-md">Assignments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-md font-label-md">Fees</span>
+</a>
+<!-- ACTIVE TAB: Reports -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-bold rounded-lg transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant dark:border-outline">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg mb-2" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Help Center</span>
+</a>
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-bold text-label-md transition-transform active:scale-95">
+                Support
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface dark:bg-on-background border-b border-outline-variant dark:border-outline flex justify-between items-center px-container-padding z-40 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-4 flex-grow max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-base focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Search analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">help</span>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="text-label-md font-label-md text-on-surface">Admin</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">System Manager</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-outline-variant animate-skeleton overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female university administrator in her late 40s, wearing a charcoal grey blazer. She has a warm, confident expression. The background is a blurred office setting with soft daylight filtering through large windows, maintaining a clean and trustworthy aesthetic with neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYeFjD2MqK-V4pX9sgyPHdsfkKZfSuB6Fomjf1_9NY7acFfvGYB87k_WzMVC169DrfYPJcFIbz7fU5ol69AJl-7NRY4jC2m9_bkXRsViFozfuwDSawZv-vtHjZAULOaLgLIKivAGox7cglJ6iZiSD2agvqtCIclzJgacbqNwYJZTH4QNMD8q_W2H0MY4y_M_sA-14H9rBrdnvy9xnMZ7dRq7PDDaxppCt1KxQVhk5SLA8fZmCB2Ack"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="mt-16 p-container-padding max-w-7xl w-full mx-auto space-y-gutter">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div class="space-y-1">
+<h2 class="text-h2 font-h2 text-on-surface">Reports &amp; Analytics</h2>
+<p class="text-body-base font-body-base text-on-surface-variant">Real-time academic and operational performance insights</p>
+</div>
+<div class="flex gap-element-gap">
+<div class="w-32 h-10 bg-outline-variant/20 rounded-lg animate-skeleton"></div>
+<div class="w-32 h-10 bg-primary/20 rounded-lg animate-skeleton"></div>
+</div>
+</div>
+<!-- Bento Grid - Key Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Metric Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between h-32">
+<div class="flex justify-between">
+<div class="w-24 h-4 bg-outline-variant/30 rounded animate-skeleton"></div>
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+</div>
+</div>
+<div class="w-16 h-8 bg-outline-variant/40 rounded animate-skeleton"></div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between h-32">
+<div class="flex justify-between">
+<div class="w-24 h-4 bg-outline-variant/30 rounded animate-skeleton"></div>
+<div class="w-8 h-8 rounded-lg bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-sm">groups</span>
+</div>
+</div>
+<div class="w-16 h-8 bg-outline-variant/40 rounded animate-skeleton"></div>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between h-32">
+<div class="flex justify-between">
+<div class="w-24 h-4 bg-outline-variant/30 rounded animate-skeleton"></div>
+<div class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">account_balance_wallet</span>
+</div>
+</div>
+<div class="w-16 h-8 bg-outline-variant/40 rounded animate-skeleton"></div>
+</div>
+<!-- Metric Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col justify-between h-32">
+<div class="flex justify-between">
+<div class="w-24 h-4 bg-outline-variant/30 rounded animate-skeleton"></div>
+<div class="w-8 h-8 rounded-lg bg-error/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+</div>
+</div>
+<div class="w-16 h-8 bg-outline-variant/40 rounded animate-skeleton"></div>
+</div>
+</div>
+<!-- Visualization Layer -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Large Chart Placeholder -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 space-y-6">
+<div class="flex justify-between items-center">
+<div class="w-48 h-6 bg-outline-variant/30 rounded animate-skeleton"></div>
+<div class="w-24 h-6 bg-outline-variant/20 rounded animate-skeleton"></div>
+</div>
+<div class="w-full h-64 bg-surface-container rounded-lg flex items-center justify-center overflow-hidden relative">
+<!-- Abstract pulse wave lines for chart feeling -->
+<div class="absolute inset-x-0 bottom-10 h-[1px] bg-outline-variant/30"></div>
+<div class="absolute inset-x-0 bottom-20 h-[1px] bg-outline-variant/30"></div>
+<div class="absolute inset-x-0 bottom-30 h-[1px] bg-outline-variant/30"></div>
+<div class="w-full h-full flex items-end justify-around px-8 pb-10">
+<div class="w-8 bg-primary/20 rounded-t animate-skeleton h-[40%]"></div>
+<div class="w-8 bg-primary/20 rounded-t animate-skeleton h-[60%]"></div>
+<div class="w-8 bg-primary/20 rounded-t animate-skeleton h-[55%]"></div>
+<div class="w-8 bg-primary/20 rounded-t animate-skeleton h-[80%]"></div>
+<div class="w-8 bg-primary/20 rounded-t animate-skeleton h-[45%]"></div>
+<div class="w-8 bg-primary/20 rounded-t animate-skeleton h-[70%]"></div>
+<div class="w-8 bg-primary/20 rounded-t animate-skeleton h-[30%]"></div>
+<div class="w-8 bg-primary/20 rounded-t animate-skeleton h-[90%]"></div>
+</div>
+</div>
+</div>
+<!-- Side Summary Cards -->
+<div class="space-y-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 space-y-4">
+<div class="w-32 h-5 bg-outline-variant/30 rounded animate-skeleton"></div>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-outline-variant/20 animate-skeleton"></div>
+<div class="flex-grow space-y-2">
+<div class="w-2/3 h-3 bg-outline-variant/20 rounded animate-skeleton"></div>
+<div class="w-1/3 h-2 bg-outline-variant/10 rounded animate-skeleton"></div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-outline-variant/20 animate-skeleton"></div>
+<div class="flex-grow space-y-2">
+<div class="w-1/2 h-3 bg-outline-variant/20 rounded animate-skeleton"></div>
+<div class="w-1/4 h-2 bg-outline-variant/10 rounded animate-skeleton"></div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-outline-variant/20 animate-skeleton"></div>
+<div class="flex-grow space-y-2">
+<div class="w-3/4 h-3 bg-outline-variant/20 rounded animate-skeleton"></div>
+<div class="w-1/2 h-2 bg-outline-variant/10 rounded animate-skeleton"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-6 space-y-3">
+<div class="w-40 h-5 bg-primary/20 rounded animate-skeleton"></div>
+<div class="w-full h-12 bg-primary/10 rounded-lg animate-skeleton"></div>
+</div>
+</div>
+</div>
+<!-- Data Table Skeleton -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<div class="w-40 h-6 bg-outline-variant/30 rounded animate-skeleton"></div>
+<div class="flex gap-3">
+<div class="w-24 h-8 bg-outline-variant/20 rounded-lg animate-skeleton"></div>
+<div class="w-24 h-8 bg-outline-variant/20 rounded-lg animate-skeleton"></div>
+</div>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="p-4"><div class="w-24 h-4 bg-outline-variant/20 rounded animate-skeleton"></div></th>
+<th class="p-4"><div class="w-32 h-4 bg-outline-variant/20 rounded animate-skeleton"></div></th>
+<th class="p-4"><div class="w-24 h-4 bg-outline-variant/20 rounded animate-skeleton"></div></th>
+<th class="p-4"><div class="w-20 h-4 bg-outline-variant/20 rounded animate-skeleton"></div></th>
+<th class="p-4 text-right"><div class="w-16 h-4 bg-outline-variant/20 rounded ml-auto animate-skeleton"></div></th>
+</tr>
+</thead>
+<tbody>
+<!-- Repeat Rows -->
+<script>
+                                for(let i=0; i<5; i++) {
+                                    document.write(`
+                                        <tr class="border-b border-outline-variant">
+                                            <td class="p-4"><div class="w-28 h-4 bg-outline-variant/10 rounded animate-skeleton"></div></td>
+                                            <td class="p-4"><div class="w-48 h-4 bg-outline-variant/10 rounded animate-skeleton"></div></td>
+                                            <td class="p-4"><div class="w-24 h-4 bg-outline-variant/10 rounded animate-skeleton"></div></td>
+                                            <td class="p-4"><div class="w-16 h-6 bg-outline-variant/10 rounded-full animate-skeleton"></div></td>
+                                            <td class="p-4"><div class="w-8 h-4 bg-outline-variant/10 rounded ml-auto animate-skeleton"></div></td>
+                                        </tr>
+                                    `);
+                                }
+                            </script>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container-low flex justify-between items-center">
+<div class="w-32 h-4 bg-outline-variant/20 rounded animate-skeleton"></div>
+<div class="flex gap-2">
+<div class="w-8 h-8 rounded bg-outline-variant/20 animate-skeleton"></div>
+<div class="w-8 h-8 rounded bg-outline-variant/20 animate-skeleton"></div>
+<div class="w-8 h-8 rounded bg-outline-variant/20 animate-skeleton"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full py-6 mt-auto bg-surface-container-lowest dark:bg-on-background border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-padding max-w-7xl mx-auto w-full">
+<p class="text-body-sm font-body-sm text-on-surface-variant">© 2024 EduCore SaaS ERP. All rights reserved.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- Floating Micro-Interaction Scripts -->
+<script>
+        // Simulate loading completion for demonstration purposes
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Fetching analytical data...');
+            // In a real app, logic here would replace skeleton with actual data
+        });
+    </script>
+</body></html>

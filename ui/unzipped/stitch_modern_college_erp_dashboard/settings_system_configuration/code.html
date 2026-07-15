@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings | EduCore ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#004395",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-primary-container": "#fefcff",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-tint": "#005ac2",
+                    "surface-variant": "#d3e4fe",
+                    "tertiary": "#924700",
+                    "inverse-surface": "#213145",
+                    "surface-container": "#e5eeff",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#001a42",
+                    "on-secondary-container": "#5c647a",
+                    "background": "#f8f9ff",
+                    "on-tertiary-fixed": "#311400",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c2c6d6",
+                    "tertiary-container": "#b75b00",
+                    "on-secondary-fixed": "#131b2e",
+                    "secondary-container": "#dae2fd",
+                    "on-background": "#0b1c30",
+                    "inverse-primary": "#adc6ff",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "on-surface": "#0b1c30",
+                    "on-surface-variant": "#424754",
+                    "primary": "#0058be",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-container-high": "#dce9ff",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "primary-fixed": "#d8e2ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#ffdcc6",
+                    "primary-container": "#2170e4",
+                    "outline": "#727785",
+                    "secondary": "#565e74",
+                    "surface-dim": "#cbdbf5",
+                    "surface": "#f8f9ff",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "48px",
+                    "unit": "4px",
+                    "container-padding": "32px",
+                    "gutter": "24px",
+                    "element-gap": "12px"
+            },
+            "fontFamily": {
+                    "h1": ["Inter"], "body-sm": ["Inter"], "label-md": ["Inter"],
+                    "h1-mobile": ["Inter"], "h3": ["Inter"], "body-base": ["Inter"],
+                    "label-sm": ["Inter"], "h2": ["Inter"], "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            view-transition-name: active-tab;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- SideNavBar Anchor -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 overflow-y-auto bg-surface-container-low dark:bg-on-background border-r border-outline-variant dark:border-outline flex flex-col h-full p-gutter z-50">
+<div class="mb-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+</div>
+<div>
+<h1 class="text-h3 font-h3 font-bold text-primary dark:text-primary-fixed">EduCore ERP</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant">SaaS Admin Portal</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Navigation Items mapping from JSON -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md font-label-md">Students</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-label-md font-label-md">Faculty</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="text-label-md font-label-md">Departments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="text-label-md font-label-md">Marks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-label-md font-label-md">Assignments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-md font-label-md">Fees</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<!-- Active State: Settings -->
+<a class="flex items-center gap-3 px-4 py-2 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-bold rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-6 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Help Center</span>
+</a>
+<button class="w-full mt-4 bg-primary text-on-primary py-2 px-4 rounded-lg font-label-md transition-all active:scale-95">
+                Support
+            </button>
+</div>
+</aside>
+<!-- TopNavBar Anchor -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 z-40 bg-surface dark:bg-on-background border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none flex justify-between items-center px-container-padding">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-body-base focus:ring-2 focus:ring-primary" placeholder="Search settings, users, or logs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">help</span>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-label-md font-bold text-on-surface leading-tight">Admin User</p>
+<p class="text-label-sm text-on-surface-variant leading-tight">System Admin</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a corporate administrator in professional attire, softly lit with high-key lighting to match the modern light-mode interface. The background is a clean, minimalist office setting with muted tones. The image style is sharp, clean, and trustworthy, reflecting the EduCore ERP brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZnzF7tOm2fxw7Vc9kR76HIHVDYMUPxfYuFJ6wmhfFapcbdJZhruh7ft2OlZSc1CSqKPzzfaozorLIEif3nsQRMfEDpeSLEJSbjWiOXo3NPCiIlSDw5lP42UZSCjaWxx1LIdO2XQ9bQeJwRK76HP3a3JLa5jn_xzPFzgShkPbP-zBqKKMV8HLkJ0n5WrduH_Tv1s4OyCWap5-WrFutGuIw64FtcbXa1DsC4WDXZaiC7l-qJEyf6Ab3"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] pt-24 pb-12 px-container-padding min-h-screen max-w-7xl">
+<!-- Page Header -->
+<div class="mb-8">
+<h2 class="text-h2 font-h2 text-on-surface">Configuration &amp; Settings</h2>
+<p class="text-body-base text-on-surface-variant mt-1">Manage your institution's global parameters, security protocols, and academic structures.</p>
+</div>
+<!-- Settings Tabs -->
+<div class="flex gap-1 border-b border-outline-variant mb-gutter overflow-x-auto no-scrollbar">
+<button class="px-6 py-3 text-label-md font-bold text-primary border-b-2 border-primary transition-all whitespace-nowrap" id="tab-general" onclick="switchTab('general')">General</button>
+<button class="px-6 py-3 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" id="tab-users" onclick="switchTab('users')">Users &amp; Roles</button>
+<button class="px-6 py-3 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" id="tab-academic" onclick="switchTab('academic')">Academic</button>
+<button class="px-6 py-3 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" id="tab-notifications" onclick="switchTab('notifications')">Notifications</button>
+<button class="px-6 py-3 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all whitespace-nowrap" id="tab-security" onclick="switchTab('security')">Security &amp; Logs</button>
+</div>
+<!-- Settings Grid -->
+<div class="grid grid-cols-12 gap-gutter" id="settings-content">
+<!-- Left Column: Form Section -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- General Section Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 shadow-sm" id="section-general">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-h3 font-h3 text-on-surface">Institution Profile</h3>
+<p class="text-body-sm text-on-surface-variant">Update the public information for your academic organization.</p>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-label-md font-bold hover:opacity-90 transition-all active:scale-95">Save Changes</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Institution Name</label>
+<input class="w-full border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="text" value="St. Edwards International University"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Registration ID</label>
+<input class="w-full border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary transition-all bg-surface-container-low" readonly="" type="text" value="EDU-2024-9981"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Primary Email</label>
+<input class="w-full border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="email" value="admin@st-edwards.edu"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Contact Number</label>
+<input class="w-full border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="tel" value="+1 (555) 012-3456"/>
+</div>
+<div class="col-span-full">
+<div class="flex items-center gap-6 mt-4 p-4 border border-dashed border-outline-variant rounded-lg bg-surface-container-low/50">
+<div class="w-20 h-20 bg-surface rounded-lg flex items-center justify-center border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="A clean, minimalist vector-style crest or logo for a modern educational institution. The design features geometric shapes and a deep blue and white color scheme. The lighting is flat and modern, ideal for a software branding element." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4f4Nzx9PQsT3Oo-8kWkQv986Zb-aPmSEjv4vnARlpL17qDHgFpypNB3351TOtK8qTYBua7Y3RY8ZOPUciVU5J8w3nUJ5-SdSGlTfKiuhxTVbTe7geTI3kNNPy06tNy7rDLF5UUEW_QlKeB_Oe9huuBW8WzaN-OjwaC-LE60NzMc79nmbAlTllEt7K3zMzmxj5RuAjLjDZJqsMJyJPbmGsSZi4ZbdJDuNKz0pcI6gbL2AsE1do6QQI"/>
+</div>
+<div class="space-y-1">
+<p class="text-label-md font-bold">Institution Logo</p>
+<p class="text-body-sm text-on-surface-variant">SVG, PNG, or JPG (max. 800x800px)</p>
+<div class="flex gap-2 pt-2">
+<button class="text-label-sm font-bold text-primary hover:underline">Upload New</button>
+<button class="text-label-sm font-bold text-error hover:underline">Remove</button>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Timezone</label>
+<select class="w-full border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+<option>GMT-05:00 Eastern Time</option>
+<option>GMT-08:00 Pacific Time</option>
+<option>GMT+00:00 UTC</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Currency</label>
+<select class="w-full border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+<option>USD ($)</option>
+<option>EUR (€)</option>
+<option>GBP (£)</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Users & Roles Section (Initially Hidden) -->
+<section class="hidden bg-surface-container-lowest border border-outline-variant rounded-xl p-8 shadow-sm" id="section-users">
+<h3 class="text-h3 font-h3 text-on-surface mb-6">User Permissions &amp; Role Management</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg border border-outline-variant hover:border-primary transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-primary-container text-on-primary-container rounded-lg">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<div>
+<p class="text-label-md font-bold">Super Admin</p>
+<p class="text-body-sm text-on-surface-variant">Full access to all modules and system settings.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-label-sm">2 Users</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">chevron_right</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg border border-outline-variant hover:border-primary transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-surface-container-high text-on-surface-variant rounded-lg">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div>
+<p class="text-label-md font-bold">Faculty</p>
+<p class="text-body-sm text-on-surface-variant">Manage classes, marks, and student assignments.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-label-sm">142 Users</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant">
+<h4 class="text-label-md font-bold mb-4">Security Defaults</h4>
+<div class="flex items-center justify-between mb-4">
+<div>
+<p class="text-label-md font-bold">Two-Factor Authentication (2FA)</p>
+<p class="text-body-sm text-on-surface-variant">Mandate 2FA for all administrative accounts.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Contextual Cards -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Quick Status Card -->
+<div class="bg-surface-container-high rounded-xl p-6 border border-outline-variant">
+<h4 class="text-label-md font-bold text-on-surface mb-4">System Status</h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant">Subscription Plan</span>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-label-sm font-bold uppercase tracking-tighter">Enterprise</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant">Storage Used</span>
+<span class="text-label-sm font-bold">4.2 GB / 50 GB</span>
+</div>
+<div class="w-full bg-outline-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[12%]"></div>
+</div>
+<button class="w-full py-2 border border-primary text-primary rounded-lg text-label-sm font-bold hover:bg-primary/5 transition-all">Manage Billing</button>
+</div>
+</div>
+<!-- Recent Activity Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant shadow-sm">
+<h4 class="text-label-md font-bold text-on-surface mb-4">Recent Security Logs</h4>
+<div class="space-y-6">
+<div class="flex gap-4 relative">
+<div class="absolute left-[11px] top-6 bottom-0 w-[1px] bg-outline-variant"></div>
+<div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div>
+<p class="text-label-sm font-bold">Admin Login</p>
+<p class="text-body-sm text-on-surface-variant">New login from IP 192.168.1.1</p>
+<p class="text-[10px] text-outline mt-1 uppercase font-bold tracking-widest">2 Minutes Ago</p>
+</div>
+</div>
+<div class="flex gap-4 relative">
+<div class="absolute left-[11px] top-6 bottom-0 w-[1px] bg-outline-variant"></div>
+<div class="w-6 h-6 rounded-full bg-tertiary/20 flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+</div>
+<div>
+<p class="text-label-sm font-bold">Academic Calendar Updated</p>
+<p class="text-body-sm text-on-surface-variant">Spring Semester dates modified by J. Doe</p>
+<p class="text-[10px] text-outline mt-1 uppercase font-bold tracking-widest">1 Hour Ago</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+</div>
+<div>
+<p class="text-label-sm font-bold">Backup Completed</p>
+<p class="text-body-sm text-on-surface-variant">Nightly system backup successful.</p>
+<p class="text-[10px] text-outline mt-1 uppercase font-bold tracking-widest">5 Hours Ago</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 text-label-sm font-bold text-primary hover:underline">View All Logs</button>
+</div>
+<!-- Academic Pulse Animated Chart (Placeholder) -->
+<div class="bg-primary text-on-primary rounded-xl p-6 relative overflow-hidden h-40">
+
+<div class="relative z-10 h-full flex flex-col justify-between">
+<h4 class="text-label-md font-bold uppercase tracking-widest">Network Performance</h4>
+<div>
+<p class="text-h3 font-h3 font-bold">99.98%</p>
+<p class="text-label-sm font-medium opacity-80">Up-time across regional nodes</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Anchor -->
+<footer class="w-full py-6 mt-auto bg-surface-container-lowest dark:bg-on-background border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-padding max-w-7xl mx-auto w-full">
+<div class="flex items-center gap-2 mb-4 md:mb-0">
+<span class="text-label-md font-label-md font-bold text-primary">EduCore ERP</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">© 2024 EduCore SaaS ERP. All rights reserved.</span>
+</div>
+<div class="flex gap-6">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+<script>
+        function switchTab(tabId) {
+            // Hide all sections
+            const sections = ['general', 'users']; // Add more as needed
+            sections.forEach(s => {
+                const section = document.getElementById('section-' + s);
+                if (section) section.classList.add('hidden');
+            });
+
+            // Reset all tab button styles
+            const tabButtons = document.querySelectorAll('[id^="tab-"]');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+                btn.classList.add('text-on-surface-variant', 'font-label-md');
+            });
+
+            // Show selected section
+            const activeSection = document.getElementById('section-' + tabId);
+            if (activeSection) activeSection.classList.remove('hidden');
+
+            // Set active tab button style
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) {
+                activeTab.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+                activeTab.classList.remove('text-on-surface-variant', 'font-label-md');
+            }
+        }
+
+        // Simple interactive micro-effect for inputs
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').classList.add('text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').classList.remove('text-primary');
+            });
+        });
+    </script>
+</body></html>

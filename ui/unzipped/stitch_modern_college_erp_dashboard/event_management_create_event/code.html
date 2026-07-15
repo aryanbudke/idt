@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Event - EduSaaS ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcc6",
+                    "surface-container-low": "#eff4ff",
+                    "on-primary-fixed": "#001a42",
+                    "on-primary": "#ffffff",
+                    "outline": "#727785",
+                    "inverse-surface": "#213145",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#fefcff",
+                    "on-primary-fixed-variant": "#004395",
+                    "secondary-container": "#dae2fd",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#dce9ff",
+                    "surface-container": "#e5eeff",
+                    "surface": "#f8f9ff",
+                    "outline-variant": "#c2c6d6",
+                    "on-background": "#0b1c30",
+                    "surface-container-highest": "#d3e4fe",
+                    "inverse-primary": "#adc6ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "background": "#f8f9ff",
+                    "secondary": "#565e74",
+                    "tertiary": "#924700",
+                    "surface-dim": "#cbdbf5",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-variant": "#d3e4fe",
+                    "primary-container": "#2170e4",
+                    "on-secondary-container": "#5c647a",
+                    "surface-tint": "#005ac2",
+                    "tertiary-container": "#b75b00",
+                    "on-tertiary-container": "#fffbff",
+                    "on-tertiary-fixed": "#311400",
+                    "on-secondary-fixed": "#131b2e",
+                    "on-surface-variant": "#424754",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#d8e2ff",
+                    "primary": "#0058be",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "on-surface": "#0b1c30",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "48px",
+                    "unit": "4px",
+                    "container-padding": "32px",
+                    "gutter": "24px",
+                    "element-gap": "12px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h2": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for administration side rail */
+        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: #c2c6d6; border-radius: 10px; }
+        
+        .step-inactive { opacity: 0.4; }
+        .form-section { display: none; }
+        .form-section.active { display: block; animation: fadeIn 0.3s ease-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-focus-ring:focus-within {
+            box-shadow: 0 0 0 2px #adc6ff;
+            border-color: #0058be;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar (Fixed Shell) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center h-16 px-container-padding w-full">
+<div class="flex items-center gap-element-gap">
+<span class="font-h3 text-h3 font-bold text-primary">EduSaaS ERP</span>
+<div class="ml-8 hidden md:flex items-center gap-6">
+<span class="text-on-secondary-fixed-variant hover:bg-surface-container-low transition-colors cursor-pointer p-2 rounded-lg font-label-md text-label-md">Dashboard</span>
+<span class="text-primary font-bold border-b-2 border-primary transition-colors cursor-pointer p-2 font-label-md text-label-md">Event Management</span>
+<span class="text-on-secondary-fixed-variant hover:bg-surface-container-low transition-colors cursor-pointer p-2 rounded-lg font-label-md text-label-md">Academic Calendar</span>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container rounded-full border-none text-body-sm font-body-sm w-64 focus:ring-2 focus:ring-primary" placeholder="Global Search..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface hover:bg-surface-container-low p-2 rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface hover:bg-surface-container-low p-2 rounded-full transition-colors">chat_sparkle</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot of a middle-aged university administrator with a friendly expression. The lighting is soft and even, typical of a high-end corporate environment. The background is a clean, neutral gray that complements the modern EduSaaS ERP interface colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnhfvaLPSRGpYYQI65tWfMsfdHZ2HxqYviDSOy2VXcHgyXTY4cbjXfBj8XYFZ5bGAOcilwcIxM2hVLrJ2hFkHcdirP0ISM3VDnZJX4MYJxVtPgYpEZZCCOTUgEIWmIh6r2qRrl-xFSGDwc1NUkMDnlFqtwDvbJsKICUDY_RKDwUw47c0lr0Pi6nerTdDsvDuFMn8GTD5CRqc7dEstR9FgTcTLRDj2MfIJVkyNCKqZNkN89RsCqBHsu"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Fixed Shell) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-72 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-4 overflow-y-auto sidebar-scroll hidden md:flex">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md font-bold text-primary">Administration</h3>
+<p class="text-[10px] text-secondary">Academic Year 2024-25</p>
+</div>
+</div>
+</div>
+<nav class="flex-1">
+<div class="px-4 mb-2">
+<p class="text-[11px] font-bold text-outline uppercase tracking-wider px-2">Core Modules</p>
+</div>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary hover:bg-surface-container transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary hover:bg-surface-container transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+                Academic Calendar
+            </a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 bg-secondary-container text-on-secondary-fixed font-semibold rounded-lg transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">event_available</span>
+                Event Management
+            </a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary hover:bg-surface-container transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">group</span>
+                Student Directory
+            </a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary hover:bg-surface-container transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">school</span>
+                Faculty Records
+            </a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary hover:bg-surface-container transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings_suggest</span>
+                System Settings
+            </a>
+</nav>
+<div class="mt-auto px-4 border-t border-outline-variant pt-4">
+<button class="w-full bg-primary text-white py-2 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 mb-4 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+                Quick Actions
+            </button>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 p-2 text-secondary hover:text-primary transition-colors font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">shield_lock</span>
+                    Security
+                </a>
+<a class="flex items-center gap-3 p-2 text-secondary hover:text-primary transition-colors font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+                    Support
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 pt-16 min-h-screen">
+<div class="max-w-5xl mx-auto p-container-padding">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-6 text-outline font-label-sm text-label-sm">
+<span>Events</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-semibold">Create New Event</span>
+</nav>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-gutter mb-section-gap">
+<div>
+<h1 class="font-h1 text-h1 text-on-background mb-2">Create Academic Event</h1>
+<p class="font-body-lg text-body-lg text-secondary">Schedule and organize seminars, workshops, or cultural activities.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors">Save Draft</button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center gap-2">
+<span>Publish Event</span>
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+<!-- Bento Layout Form Area -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Rail: Stepper -->
+<div class="lg:col-span-3">
+<div class="sticky top-24 space-y-gutter">
+<div class="flex items-center gap-3 group cursor-pointer" onclick="goToStep(1)">
+<div class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center font-bold text-primary bg-primary-fixed" id="step-1-indicator">1</div>
+<span class="font-label-md text-label-md font-bold text-on-surface" id="step-1-label">Basic Info</span>
+</div>
+<div class="w-[2px] h-8 bg-outline-variant ml-5"></div>
+<div class="flex items-center gap-3 group cursor-pointer step-inactive" onclick="goToStep(2)">
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant flex items-center justify-center font-bold text-outline" id="step-2-indicator">2</div>
+<span class="font-label-md text-label-md font-medium text-secondary" id="step-2-label">Logistics</span>
+</div>
+<div class="w-[2px] h-8 bg-outline-variant ml-5"></div>
+<div class="flex items-center gap-3 group cursor-pointer step-inactive" onclick="goToStep(3)">
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant flex items-center justify-center font-bold text-outline" id="step-3-indicator">3</div>
+<span class="font-label-md text-label-md font-medium text-secondary" id="step-3-label">Settings</span>
+</div>
+</div>
+</div>
+<!-- Center: Form Content -->
+<div class="lg:col-span-9 space-y-gutter">
+<form class="space-y-gutter" id="event-form">
+<!-- Step 1: Basic Info -->
+<div class="form-section active space-y-gutter" id="section-1">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 shadow-sm">
+<h2 class="font-h3 text-h3 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">info</span>
+                                    Primary Details
+                                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="md:col-span-2">
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Event Title</label>
+<input class="w-full p-3 border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-fixed outline-none transition-all" placeholder="e.g. Annual Tech Symposium 2024" type="text"/>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Category</label>
+<select class="w-full p-3 border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-fixed outline-none appearance-none bg-no-repeat bg-[right_1rem_center] transition-all">
+<option>Academic Workshop</option>
+<option>Guest Lecture</option>
+<option>Cultural Festival</option>
+<option>Sports Event</option>
+</select>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Department</label>
+<input class="w-full p-3 border border-outline-variant rounded-lg font-body-base text-body-base bg-surface-container text-on-surface-variant cursor-not-allowed" readonly="" type="text" value="School of Computer Science"/>
+</div>
+<div class="md:col-span-2">
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Detailed Description</label>
+<textarea class="w-full p-3 border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-fixed outline-none transition-all" placeholder="Provide a comprehensive outline of the event objectives and outcomes..." rows="6"></textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2: Logistics -->
+<div class="form-section space-y-gutter" id="section-2">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 shadow-sm">
+<h2 class="font-h3 text-h3 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+                                    Time &amp; Venue
+                                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Start Date &amp; Time</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">schedule</span>
+<input class="w-full pl-10 pr-3 py-3 border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-fixed outline-none transition-all" type="datetime-local"/>
+</div>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">End Date &amp; Time</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">event_repeat</span>
+<input class="w-full pl-10 pr-3 py-3 border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-fixed outline-none transition-all" type="datetime-local"/>
+</div>
+</div>
+<div class="md:col-span-2">
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Venue Name</label>
+<input class="w-full p-3 border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-fixed outline-none transition-all" placeholder="e.g. Main Auditorium, Block C" type="text"/>
+</div>
+<div class="md:col-span-2">
+<div class="h-48 w-full rounded-xl border border-outline-variant overflow-hidden relative group">
+<div class="absolute inset-0 bg-surface-container flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-opacity-80 z-10">
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-label-md text-label-md" type="button">Pin on Map</button>
+</div>
+<div class="w-full h-full bg-cover bg-center" data-alt="A detailed digital map view showing a university campus layout with clean blue and gray tones. The map highlights key buildings with minimalist pins and labeled lecture halls, consistent with a high-end academic SaaS interface. Soft grid lines and elegant vector icons mark parking and amenities." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPewNJq4g6OmA4TMinWGw_8xuYQF6yZNf95oQBGjiU_nNiVh383FI53WvTFTo9PN-0EB56iyKz2ykYyCJ7sfvliin7tscHSd8VFOfOX58ZhN8TWc56POPd3FesjyuXDqY2TtG66mDh3PuFBqi9i8679Sqvry7OzqwcGtkKW3lO8J9pvnWJZQtjQ3b4Co3D8trQjMaXEmwKpLTmM7jYVMyzzB3zdtVrIccmZEzDWdrspp4R9JJFCMt')"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 3: Settings -->
+<div class="form-section space-y-gutter" id="section-3">
+<!-- Registration Toggle -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="font-h3 text-h3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person_add</span>
+                                            Registration
+                                        </h2>
+<p class="text-secondary font-body-sm text-body-sm mt-1">Enable students to register and track attendance.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Maximum Capacity</label>
+<input class="w-full p-3 border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-fixed outline-none transition-all" placeholder="No limit" type="number"/>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-secondary mb-2 block">Registration Deadline</label>
+<input class="w-full p-3 border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-fixed outline-none transition-all" type="date"/>
+</div>
+</div>
+</div>
+<!-- Certificate Upload -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 shadow-sm">
+<h2 class="font-h3 text-h3 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">workspace_premium</span>
+                                    Certificates
+                                </h2>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-12 flex flex-col items-center justify-center bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-5xl text-outline mb-4 group-hover:scale-110 transition-transform">upload_file</span>
+<p class="font-label-md text-label-md font-bold text-on-surface">Upload Certificate Template</p>
+<p class="text-secondary font-body-sm text-body-sm mt-1">Support PDF or PNG (Max 5MB)</p>
+<input class="hidden" type="file"/>
+</div>
+<div class="mt-6 flex gap-4">
+<div class="flex-1 p-4 border border-outline-variant rounded-lg flex items-center gap-3 bg-white">
+<span class="material-symbols-outlined text-primary">description</span>
+<div class="flex-1">
+<p class="text-label-md font-label-md">Default_Template_2024.pdf</p>
+<p class="text-outline text-[10px]">2.4 MB • Uploaded 2 mins ago</p>
+</div>
+<button class="material-symbols-outlined text-error hover:bg-error-container p-2 rounded-full transition-colors" type="button">delete</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Navigation Buttons -->
+<div class="flex justify-between items-center py-8">
+<button class="invisible px-6 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors flex items-center gap-2" id="prev-btn" onclick="prevStep()" type="button">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                                Previous Step
+                            </button>
+<button class="px-8 py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center gap-2 shadow-lg shadow-primary/20" id="next-btn" onclick="nextStep()" type="button">
+<span id="next-text">Next Logistics</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Toast (Hidden) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-on-background text-white px-8 py-4 rounded-full flex items-center gap-4 shadow-2xl opacity-0 translate-y-10 transition-all z-[100]" id="success-toast">
+<span class="material-symbols-outlined text-green-400">check_circle</span>
+<p class="font-label-md text-label-md">Event draft saved successfully!</p>
+</div>
+<script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function updateUI() {
+            // Update Sections
+            document.querySelectorAll('.form-section').forEach((section, idx) => {
+                section.classList.toggle('active', (idx + 1) === currentStep);
+            });
+
+            // Update Stepper
+            for (let i = 1; i <= totalSteps; i++) {
+                const indicator = document.getElementById(`step-${i}-indicator`);
+                const label = document.getElementById(`step-${i}-label`);
+                const parent = indicator.parentElement;
+
+                if (i === currentStep) {
+                    indicator.classList.remove('border-outline-variant', 'text-outline', 'bg-transparent');
+                    indicator.classList.add('border-primary', 'text-primary', 'bg-primary-fixed');
+                    label.classList.add('font-bold', 'text-on-surface');
+                    label.classList.remove('font-medium', 'text-secondary');
+                    parent.classList.remove('step-inactive');
+                } else if (i < currentStep) {
+                    indicator.classList.remove('text-primary', 'bg-primary-fixed');
+                    indicator.classList.add('bg-primary', 'text-white', 'border-primary');
+                    label.classList.remove('font-bold', 'text-on-surface');
+                    label.classList.add('font-medium', 'text-secondary');
+                    parent.classList.remove('step-inactive');
+                    indicator.innerHTML = '<span class="material-symbols-outlined text-sm">check</span>';
+                } else {
+                    indicator.classList.add('border-outline-variant', 'text-outline');
+                    indicator.classList.remove('border-primary', 'text-primary', 'bg-primary-fixed', 'bg-primary', 'text-white');
+                    indicator.innerHTML = i;
+                    label.classList.remove('font-bold', 'text-on-surface');
+                    label.classList.add('font-medium', 'text-secondary');
+                    parent.classList.add('step-inactive');
+                }
+            }
+
+            // Update Navigation Buttons
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const nextText = document.getElementById('next-text');
+
+            prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+
+            if (currentStep === 1) nextText.innerText = 'Next: Logistics';
+            else if (currentStep === 2) nextText.innerText = 'Next: Settings';
+            else nextText.innerText = 'Publish Event';
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            } else {
+                showToast();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function goToStep(step) {
+            if (step <= currentStep || (step === currentStep + 1)) {
+                currentStep = step;
+                updateUI();
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('success-toast');
+            toast.classList.remove('opacity-0', 'translate-y-10');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 3000);
+        }
+
+        // Initialize UI
+        updateUI();
+    </script>
+</body></html>

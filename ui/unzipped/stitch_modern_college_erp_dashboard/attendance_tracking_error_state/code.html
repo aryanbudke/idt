@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Attendance Tracking - Error | EduCore ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#424754",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-primary-fixed": "#001a42",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "secondary-container": "#dae2fd",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#924700",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "surface-variant": "#d3e4fe",
+                    "secondary-fixed": "#dae2fd",
+                    "on-background": "#0b1c30",
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-container": "#e5eeff",
+                    "outline-variant": "#c2c6d6",
+                    "on-tertiary-container": "#fffbff",
+                    "primary": "#0058be",
+                    "surface-container-low": "#eff4ff",
+                    "on-secondary-container": "#5c647a",
+                    "background": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#213145",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed": "#311400",
+                    "primary-container": "#2170e4",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#b75b00",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005ac2",
+                    "outline": "#727785",
+                    "surface": "#f8f9ff",
+                    "secondary": "#565e74",
+                    "inverse-primary": "#adc6ff",
+                    "surface-bright": "#f8f9ff",
+                    "on-surface": "#0b1c30",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-container": "#fefcff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "tertiary-fixed": "#ffdcc6",
+                    "surface-dim": "#cbdbf5",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "48px",
+                    "gutter": "24px",
+                    "container-padding": "32px",
+                    "unit": "4px",
+                    "element-gap": "12px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .error-ghost {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar Anchor Component -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 overflow-y-auto bg-surface-container-low dark:bg-on-background border-r border-outline-variant dark:border-outline flex flex-col p-gutter z-50">
+<div class="mb-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">school</span>
+</div>
+<div>
+<h1 class="text-h3 font-h3 font-bold text-primary dark:text-primary-fixed">EduCore ERP</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant">SaaS Admin Portal</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md font-label-md">Students</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-label-md font-label-md">Faculty</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="text-label-md font-label-md">Departments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-bold rounded-lg transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event_available</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="text-label-md font-label-md">Marks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-label-md font-label-md">Assignments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-md font-label-md">Fees</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-secondary-fixed-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-outline-variant dark:border-outline">
+<button class="w-full flex items-center justify-center gap-2 py-3 mb-4 bg-primary text-on-primary rounded-lg font-label-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">support_agent</span>
+                Support
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-sm font-label-sm">Help Center</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[280px] flex flex-col min-h-screen">
+<!-- TopNavBar Anchor Component -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface dark:bg-on-background border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none flex justify-between items-center px-container-padding z-40">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container border border-outline-variant rounded-lg text-body-sm focus:outline-none focus:border-primary" placeholder="Search students, faculty, or IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right">
+<p class="text-label-md font-label-md text-on-surface">Admin</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Super User</p>
+</div>
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged university administrator in a modern office. The lighting is soft and corporate, with a clean blurred background of academic bookshelves. The aesthetic is professional, trustworthy, and clear, using a bright and crisp photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASDYSZVU8q0Q5tm9hflwRVy1gaSNAhLXPgzqwaVmt7UXzFaHou-FN6bsLgvG2C4Tmj9y31Ybe0BAfLCpUmQDOECWXFulJIDz-qQNbf33Cm5nVDezpA4r8LIVC291zC81fp6JXPvf12g3DmKWMQaYerRNpWoEp7y4KlhiG-P9-9x9voEYDmm7W2xVsafiNqk97OIKPNgh5aAs77BGWs3p-Bqsgdhou79PCeLMEvsmp-A_5kI2_2D8CY"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<section class="mt-16 p-container-padding flex-1 flex flex-col items-center justify-center bg-surface">
+<!-- Breadcrumbs -->
+<nav class="w-full max-w-4xl mb-8 flex items-center gap-2 text-on-surface-variant">
+<span class="text-label-sm font-label-sm hover:text-primary cursor-pointer">Dashboard</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-label-sm font-label-sm text-primary font-bold">Attendance Tracking</span>
+</nav>
+<!-- Error State Bento Grid Layout (Conceptual) -->
+<div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+<!-- Main Error Card -->
+<div class="md:col-span-12 lg:col-span-12 bg-white rounded-xl border border-outline-variant p-10 flex flex-col items-center text-center shadow-sm">
+<div class="w-24 h-24 bg-error-container rounded-full flex items-center justify-center mb-6 error-ghost">
+<span class="material-symbols-outlined text-error text-[48px]">cloud_off</span>
+</div>
+<h2 class="text-h1 font-h1 text-on-surface mb-4">Something went wrong</h2>
+<div class="max-w-md">
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-8">
+                            Unable to fetch attendance records. Please check your connection.
+                        </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="px-8 py-3 bg-primary text-on-primary rounded-lg font-label-md hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2" onclick="location.reload()">
+<span class="material-symbols-outlined">refresh</span>
+                            Retry
+                        </button>
+<button class="px-8 py-3 border border-outline-variant text-on-surface rounded-lg font-label-md hover:bg-surface-variant transition-all active:scale-95">
+                            View Cached Records
+                        </button>
+</div>
+<!-- Technical Details Accordion -->
+<div class="mt-12 w-full border-t border-outline-variant pt-6 text-left">
+<details class="group cursor-pointer">
+<summary class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors list-none">
+<span>Technical Details</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-4 p-4 bg-surface-container-low rounded-lg font-mono text-[12px] text-on-surface-variant overflow-x-auto">
+<p>Error Code: 503_SERVICE_UNAVAILABLE</p>
+<p>Timestamp: 2024-05-24T14:32:01.442Z</p>
+<p>Endpoint: /api/v1/attendance/records/fetch</p>
+<p>Reason: Connection timeout after 30000ms</p>
+</div>
+</details>
+</div>
+</div>
+<!-- Secondary Support Card -->
+<div class="md:col-span-12 lg:col-span-8 bg-surface-container rounded-xl border border-outline-variant p-6 flex items-center gap-6">
+<div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[32px]">contact_support</span>
+</div>
+<div class="flex-1">
+<h4 class="text-label-md font-label-md text-on-surface font-bold">Need assistance?</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Our IT support team is available 24/7 to help resolve synchronization issues.</p>
+</div>
+<button class="text-primary font-bold text-label-md hover:underline underline-offset-4">Contact IT</button>
+</div>
+<!-- System Status Card -->
+<div class="md:col-span-12 lg:col-span-4 bg-tertiary-fixed rounded-xl border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<h4 class="text-label-sm font-label-sm text-on-tertiary-fixed font-bold uppercase tracking-wider">System Status</h4>
+</div>
+<p class="text-body-sm font-body-sm text-on-tertiary-fixed-variant">Degraded performance detected on Academic Database Cluster.</p>
+</div>
+</div>
+</section>
+<!-- Footer Anchor Component -->
+<footer class="w-full py-6 mt-auto bg-surface-container-lowest dark:bg-on-background border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-padding max-w-7xl mx-auto gap-4">
+<div class="flex items-center gap-4">
+<p class="text-label-md font-label-md font-bold text-primary">EduCore ERP</p>
+<span class="text-body-sm font-body-sm text-on-surface-variant">© 2024 EduCore SaaS ERP. All rights reserved.</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Micro-interactions for button scales
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+            btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
+        });
+    </script>
+</body></html>

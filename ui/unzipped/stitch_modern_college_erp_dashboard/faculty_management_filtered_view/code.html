@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Faculty Management - EduCore ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#424754",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-primary-fixed": "#001a42",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "secondary-container": "#dae2fd",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#924700",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "surface-variant": "#d3e4fe",
+                    "secondary-fixed": "#dae2fd",
+                    "on-background": "#0b1c30",
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-container": "#e5eeff",
+                    "outline-variant": "#c2c6d6",
+                    "on-tertiary-container": "#fffbff",
+                    "primary": "#0058be",
+                    "surface-container-low": "#eff4ff",
+                    "on-secondary-container": "#5c647a",
+                    "background": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#213145",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed": "#311400",
+                    "primary-container": "#2170e4",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#b75b00",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005ac2",
+                    "outline": "#727785",
+                    "surface": "#f8f9ff",
+                    "secondary": "#565e74",
+                    "inverse-primary": "#adc6ff",
+                    "surface-bright": "#f8f9ff",
+                    "on-surface": "#0b1c30",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-container": "#fefcff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "tertiary-fixed": "#ffdcc6",
+                    "surface-dim": "#cbdbf5",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "48px",
+                    "gutter": "24px",
+                    "container-padding": "32px",
+                    "unit": "4px",
+                    "element-gap": "12px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            @apply bg-secondary-container text-on-secondary-container font-bold rounded-lg;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Side Navigation Bar -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 overflow-y-auto bg-surface-container-low border-r border-outline-variant flex flex-col p-gutter z-50">
+<div class="mb-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">school</span>
+</div>
+<div>
+<h1 class="text-h3 font-h3 font-bold text-primary">EduCore ERP</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant">SaaS Admin Portal</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="person">person</span>
+<span class="text-label-md font-label-md">Students</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-label-md font-label-md">Faculty</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="domain">domain</span>
+<span class="text-label-md font-label-md">Departments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="event_available">event_available</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="grade">grade</span>
+<span class="text-label-md font-label-md">Marks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="assignment">assignment</span>
+<span class="text-label-md font-label-md">Assignments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="payments">payments</span>
+<span class="text-label-md font-label-md">Fees</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="description">description</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-primary text-on-primary rounded-lg font-bold text-label-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+                Support
+            </button>
+<a class="mt-4 flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-label-sm font-label-sm">Help Center</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] min-h-screen flex flex-col">
+<!-- Top Nav Bar -->
+<header class="h-16 fixed top-0 right-0 w-[calc(100%-280px)] bg-surface border-b border-outline-variant flex justify-between items-center px-container-padding z-40 shadow-sm">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:border-primary text-body-sm transition-all" placeholder="Search faculty by name, ID or research area..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="relative p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 cursor-pointer active:opacity-80 transition-opacity">
+<div class="text-right">
+<p class="text-label-md font-label-md text-on-surface">Alex Riverton</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Admin</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A professional studio portrait of a university administrator in business attire, clean white background, soft corporate lighting, high definition, modern minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAHuqlZcRclcTvHUJWIYoBSXnpTr2af-F5x5xu9YZxgOIheTk97DK-D_qigBTussPYw6y0eKH2ESHqVLfviU5iqNsFHtbOYcqnViVJvoLpI8VnLlZ7aF035HFqqhgwiBrvbJOU-MSwTXZtDU1ousO6UAAxf1D8jr8GM6xCrnIy9Bk0q53VTBXeV8-lYe3lb9LL9_VuzOmTHB7IwTDZcLtgrAPM6e4dX4GX2EgchZ95YHTh4Qjo2R3E"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="mt-16 p-container-padding flex-1">
+<div class="flex justify-between items-end mb-8">
+<div>
+<div class="flex items-center gap-4 mb-1">
+<h2 class="text-h2 font-h2 text-on-surface">Faculty Directory</h2>
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-label-sm font-bold">3 Results Found</span>
+</div>
+<p class="text-body-base font-body-base text-on-surface-variant">Manage and filter academic staff records across departments.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined">add</span>
+                    Add New Faculty
+                </button>
+</div>
+<div class="flex gap-gutter">
+<!-- Side Filter Panel -->
+<aside class="w-72 flex-shrink-0 bg-white border border-outline-variant rounded-xl p-6 h-fit sticky top-24">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-label-md font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                            Filters
+                        </h3>
+<button class="text-primary text-label-sm font-bold hover:underline">Clear All</button>
+</div>
+<div class="space-y-6">
+<!-- Department Filter -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Department</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-3 py-2 text-body-sm focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Computer Science</option>
+<option>Mechanical Engineering</option>
+<option>Applied Mathematics</option>
+<option>Social Sciences</option>
+</select>
+</div>
+<!-- Designation Filter -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Designation</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant cursor-pointer transition-colors border border-primary-container bg-primary-container/10">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm">Associate Professor</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant cursor-pointer transition-colors">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm">Lecturer</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-variant cursor-pointer transition-colors">
+<input class="rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm">HOD</span>
+</label>
+</div>
+</div>
+<!-- Status Filter -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Status</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-1.5 rounded-full border border-primary bg-primary text-on-primary text-label-sm">Active</button>
+<button class="px-4 py-1.5 rounded-full border border-outline text-on-surface-variant text-label-sm hover:border-primary transition-colors">On Leave</button>
+<button class="px-4 py-1.5 rounded-full border border-outline text-on-surface-variant text-label-sm hover:border-primary transition-colors">Retired</button>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant">
+<div class="bg-surface-container-high rounded-lg p-4">
+<p class="text-label-sm font-bold text-on-surface mb-1">Advanced Search</p>
+<p class="text-[11px] text-on-surface-variant mb-3">Search by Publication DOI or Faculty ID</p>
+<input class="w-full bg-surface border border-outline-variant rounded-lg px-3 py-1.5 text-body-sm" placeholder="Enter ID..." type="text"/>
+</div>
+</div>
+</div>
+</aside>
+<!-- Faculty Listing Bento Grid -->
+<div class="flex-1 space-y-6">
+<!-- Results Header / Applied Filters Chips -->
+<div class="flex flex-wrap items-center gap-3">
+<span class="text-label-sm text-on-surface-variant">Applied:</span>
+<div class="flex items-center gap-1 bg-surface-container-high px-3 py-1 rounded-lg text-label-sm text-on-surface-variant">
+                            Dept: Computer Science
+                            <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error">close</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-3 py-1 rounded-lg text-label-sm text-on-surface-variant">
+                            Status: Active
+                            <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error">close</span>
+</div>
+<button class="text-label-sm text-primary font-bold ml-2">Clear filters</button>
+</div>
+<!-- Faculty Cards Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Faculty Card 1 -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
+<div class="p-6 flex gap-6">
+<div class="relative">
+<img class="w-24 h-24 rounded-xl object-cover border-2 border-primary-fixed" data-alt="A portrait of a senior male professor with grey hair and glasses, wearing a professional grey suit. The lighting is soft and focused, creating a distinguished academic look. Minimalist grey background, 8k resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0r4hJ1vaZSPGs93mtVwzZmtHhsPiUgRquv_InquKGLBQMoEDOyyxw-ObxktFEvskJsLdYqViwwYcKCX4DwbsiW1JaJVPHk4L0PWNN3bxOZ4gGXEZ-s0jWRMvOehjOPMW3ZIYLG04SZYt4sxoCO_e9_Di3uLFu6YKZEKoWbbZyYhlY2CIj8OxQbUmTL2MMW7e5rXV_lifXoTYlp1B-BuZiRgkCxUsz2TVyxUchjyGhi6ygQKONbwyu"/>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-h3 font-h3 text-on-surface mb-0.5">Dr. Robert Chen</h4>
+<p class="text-label-md font-bold text-primary">Associate Professor</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined" data-icon="edit">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-4">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">domain</span>
+<span class="text-body-sm">Computer Science</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="text-body-sm">Joined Sep 2018</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span class="text-body-sm">r.chen@edu.com</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="text-body-sm">PhD (MIT)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low px-6 py-3 flex justify-between items-center border-t border-outline-variant">
+<div class="flex gap-4">
+<span class="text-label-sm font-bold text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">menu_book</span>
+                                        8 Publications
+                                    </span>
+<span class="text-label-sm font-bold text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">groups</span>
+                                        12 Students
+                                    </span>
+</div>
+<button class="text-primary text-label-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    View Profile <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Faculty Card 2 -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
+<div class="p-6 flex gap-6">
+<div class="relative">
+<img class="w-24 h-24 rounded-xl object-cover border-2 border-primary-fixed" data-alt="A portrait of a middle-aged female professor with a kind expression, wearing a navy blazer and white blouse. Clean corporate background, professional cinematic lighting, high-end photography style, soft focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm92sA2mTSk6h6CrMNTZbVZtUZbpS0axd5qGmfzCR7sFonnngm1P-9CdfJ_RF77xzo8HdrPWgHVOgzoa1aD6KxwJPJgZTmtlSDMYItQYNgiJmD3-NjSqLbPzncxh1ehGGtXE8S04P5bfO53mPkSEOSENLzbGfQ5BNxMXrhzeanHQ-UTyVBIno9Tfuy4o14EKXl41HDiCcSimAFAHFuFT4ey_QJRIz0zntXmIrlKLVDIPn3wAGmx595"/>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-h3 font-h3 text-on-surface mb-0.5">Dr. Sarah Jenkins</h4>
+<p class="text-label-md font-bold text-primary">Associate Professor</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined" data-icon="edit">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-4">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">domain</span>
+<span class="text-body-sm">Computer Science</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="text-body-sm">Joined Jan 2020</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span class="text-body-sm">s.jenkins@edu.com</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="text-body-sm">PhD (Stanford)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low px-6 py-3 flex justify-between items-center border-t border-outline-variant">
+<div class="flex gap-4">
+<span class="text-label-sm font-bold text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">menu_book</span>
+                                        15 Publications
+                                    </span>
+<span class="text-label-sm font-bold text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">groups</span>
+                                        24 Students
+                                    </span>
+</div>
+<button class="text-primary text-label-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    View Profile <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Faculty Card 3 (Visual Variety: Featured Highlight) -->
+<div class="col-span-full bg-primary-container/5 border-2 border-primary-fixed rounded-2xl overflow-hidden hover:shadow-lg transition-all relative">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-primary text-on-primary text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase">Department Lead</span>
+</div>
+<div class="p-8 flex flex-col md:flex-row gap-8 items-center">
+<div class="relative">
+<img class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl" data-alt="A striking portrait of a diverse male academic in his 40s, wearing a modern blue suit and spectacles, in a university library environment with blurred bookshelves in the background. High contrast, sharp detail, intellectual and powerful aura." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKagLhCCAVDozHCoOIn21bnuxeAM-o7WayXzFJ7fqQ008gEXoQ26apWQmlaStNXRW49sYcxtyxqHEiu8pWcQxYXFrIQG2KpD4pgQrgSVpRW_G7rd9BWrz-2tVhh4W62DaJCLXwyV4sjThEwwwM_hLWuqDBd_4ACrvHZJT6sdmQp5P3h_q_9E6PJGJ-9yYS9e4e9GxlU6W3LvLXMVXqlM1P7tHs5Yv0ujfShDpvZouOrfCwHIveAGn"/>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary p-1.5 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+</div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+<h4 class="text-h2 font-h2 text-on-surface">Dr. James Wilson</h4>
+<span class="bg-primary-container text-on-primary-container px-4 py-1 rounded-full text-label-sm font-bold w-fit mx-auto md:mx-0">HOD - Computer Science</span>
+</div>
+<p class="text-body-base text-on-surface-variant max-w-2xl mb-6">Specialize in Artificial Intelligence and Neural Networks with over 15 years of academic excellence and 40+ international journals.</p>
+<div class="flex flex-wrap gap-4 justify-center md:justify-start">
+<div class="flex items-center gap-3 bg-white px-5 py-2.5 rounded-xl border border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-primary">email</span>
+<span class="text-label-md font-bold">j.wilson@edu.com</span>
+</div>
+<div class="flex items-center gap-3 bg-white px-5 py-2.5 rounded-xl border border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-primary">phone</span>
+<span class="text-label-md font-bold">+1 (555) 012-3456</span>
+</div>
+<button class="bg-primary text-on-primary px-8 py-2.5 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-md">
+                                            Contact Faculty
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full py-6 mt-auto bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-padding max-w-7xl mx-auto">
+<div class="mb-4 md:mb-0 text-center md:text-left">
+<p class="text-label-md font-label-md font-bold text-primary mb-1">EduCore ERP</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">© 2024 EduCore SaaS ERP. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', (e) => {
+                // Prevent default for anchor tags for demo
+                if (el.tagName === 'A' && el.getAttribute('href') === '#') e.preventDefault();
+                
+                // Add a small scale effect
+                el.classList.add('scale-95');
+                setTimeout(() => el.classList.remove('scale-95'), 100);
+            });
+        });
+    </script>
+</body></html>

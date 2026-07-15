@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Global Search | EduSaaS ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .command-palette-backdrop {
+            backdrop-filter: blur(8px);
+            background-color: rgba(15, 23, 42, 0.4);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @keyframes modalEnter {
+            from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-modal {
+            animation: modalEnter 0.2s ease-out forwards;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#ffdcc6",
+                      "surface-container-low": "#eff4ff",
+                      "on-primary-fixed": "#001a42",
+                      "on-primary": "#ffffff",
+                      "outline": "#727785",
+                      "inverse-surface": "#213145",
+                      "primary-fixed-dim": "#adc6ff",
+                      "on-error": "#ffffff",
+                      "on-primary-container": "#fefcff",
+                      "on-primary-fixed-variant": "#004395",
+                      "secondary-container": "#dae2fd",
+                      "tertiary-fixed-dim": "#ffb786",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#dce9ff",
+                      "surface-container": "#e5eeff",
+                      "surface": "#f8f9ff",
+                      "outline-variant": "#c2c6d6",
+                      "on-background": "#0b1c30",
+                      "surface-container-highest": "#d3e4fe",
+                      "inverse-primary": "#adc6ff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f8f9ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "background": "#f8f9ff",
+                      "secondary": "#565e74",
+                      "tertiary": "#924700",
+                      "surface-dim": "#cbdbf5",
+                      "secondary-fixed": "#dae2fd",
+                      "surface-variant": "#d3e4fe",
+                      "primary-container": "#2170e4",
+                      "on-secondary-container": "#5c647a",
+                      "surface-tint": "#005ac2",
+                      "tertiary-container": "#b75b00",
+                      "on-tertiary-container": "#fffbff",
+                      "on-tertiary-fixed": "#311400",
+                      "on-secondary-fixed": "#131b2e",
+                      "on-surface-variant": "#424754",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed": "#d8e2ff",
+                      "primary": "#0058be",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "on-surface": "#0b1c30",
+                      "on-tertiary-fixed-variant": "#723600",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-gap": "48px",
+                      "unit": "4px",
+                      "container-padding": "32px",
+                      "gutter": "24px",
+                      "element-gap": "12px"
+              },
+              "fontFamily": {
+                      "h3": ["Inter"],
+                      "label-md": ["Inter"],
+                      "h2": ["Inter"],
+                      "h1-mobile": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-base": ["Inter"],
+                      "h1": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center h-16 px-container-padding w-full">
+<div class="flex items-center gap-4">
+<span class="font-h3 text-h3 font-bold text-primary dark:text-primary-fixed-dim">EduSaaS ERP</span>
+<div class="hidden md:flex ml-8 gap-6 h-full items-center">
+<a class="font-body-base text-body-base text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary h-full flex items-center px-2" href="#">Dashboard</a>
+<a class="font-body-base text-body-base text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors px-2 rounded-md" href="#">Academics</a>
+<a class="font-body-base text-body-base text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors px-2 rounded-md" href="#">Staff</a>
+</div>
+</div>
+<div class="flex items-center gap-element-gap">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-low rounded-lg text-outline border border-outline-variant hover:border-primary transition-all cursor-pointer active:scale-95 group" id="searchButton">
+<span class="material-symbols-outlined text-[20px]">search</span>
+<span class="text-label-md font-label-md">Global Search</span>
+<span class="ml-4 px-1.5 py-0.5 rounded border border-outline-variant bg-surface-container-lowest text-[10px] font-bold">CTRL K</span>
+</button>
+<div class="flex gap-2 ml-4">
+<span class="material-symbols-outlined text-primary cursor-pointer p-2 hover:bg-surface-container rounded-full transition-colors">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer p-2 hover:bg-surface-container rounded-full transition-colors">chat_spark</span>
+<span class="material-symbols-outlined text-primary cursor-pointer p-2 hover:bg-surface-container rounded-full transition-colors">help</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden ml-2 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female academic administrator in her 40s, wearing business casual attire, with a soft-focus office background that matches the EduSaaS ERP's clean, minimalist aesthetic with cool blue and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbGmdu6JT0CS7HYiAEQ-BFYchhFOqqGfExOQ3tb2zPv8OjBDFDGc7a9YJ_9wuKO0gFrAfNJEA0uZ2Kpv7JuHJjwBFp5Hs2aNKgzZivTQ8hdILyt7KtEXR6gSM4tdFWi9kZb8VqlS-sXShYkVUpBtN9RXJRGHpUMvIl9NK0qhhr9o13Qn_IDJuEL7qQiAqzQCOzHFrw4o9LCGnv_BZwUk4-K7kQIVALTpHK3xK53uMsbu4SlyTLUci2"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-screen w-72 bg-surface-container-lowest dark:bg-surface-dim border-r border-outline-variant dark:border-outline flex flex-col py-4 overflow-y-auto hidden md:flex">
+<div class="px-6 mb-6">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold">A</div>
+<span class="font-label-md text-label-md font-bold text-primary">Administration</span>
+</div>
+<p class="text-[11px] uppercase tracking-wider text-outline font-bold px-1">Academic Year 2024-25</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-fixed dark:text-secondary-fixed-dim font-semibold rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">calendar_month</span>
+<span class="font-label-md text-label-md">Academic Calendar</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">event_available</span>
+<span class="font-label-md text-label-md">Event Management</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">group</span>
+<span class="font-label-md text-label-md">Student Directory</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">school</span>
+<span class="font-label-md text-label-md">Faculty Records</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings_suggest</span>
+<span class="font-label-md text-label-md">System Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-4 border-t border-outline-variant/30">
+<button class="w-full py-2.5 bg-primary text-white rounded-lg font-label-md mb-4 flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Quick Actions
+            </button>
+<div class="space-y-1 pb-20">
+<a class="flex items-center gap-element-gap p-2 text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">shield_lock</span>
+<span class="text-label-sm font-label-sm">Security</span>
+</a>
+<a class="flex items-center gap-element-gap p-2 text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">contact_support</span>
+<span class="text-label-sm font-label-sm">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 pt-24 px-container-padding pb-12 min-h-screen">
+<div class="max-w-[1440px] mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface mb-2">Welcome Back, Sarah</h1>
+<p class="text-body-lg font-body-lg text-outline">Here is an overview of the campus activities today.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-outline-variant bg-white rounded-lg text-label-md font-label-md text-on-surface hover:bg-surface-container transition-colors">Generate Report</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-label-md font-label-md hover:bg-primary-container transition-colors">System Update</button>
+</div>
+</div>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Stat 1 -->
+<div class="md:col-span-3 p-6 bg-white border border-outline-variant rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined p-2 bg-surface-container-highest text-primary rounded-lg">person_search</span>
+<span class="text-label-sm font-label-sm text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+12%</span>
+</div>
+<p class="text-label-sm font-label-sm text-outline mb-1">Active Students</p>
+<p class="font-h2 text-h2 text-on-surface">12,402</p>
+</div>
+<!-- Stat 2 -->
+<div class="md:col-span-3 p-6 bg-white border border-outline-variant rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined p-2 bg-surface-container-highest text-primary rounded-lg">payments</span>
+<span class="text-label-sm font-label-sm text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+4%</span>
+</div>
+<p class="text-label-sm font-label-sm text-outline mb-1">Revenue YTD</p>
+<p class="font-h2 text-h2 text-on-surface">$1.2M</p>
+</div>
+<!-- Main Feature Card -->
+<div class="md:col-span-6 md:row-span-2 relative overflow-hidden bg-primary-container rounded-xl shadow-sm group">
+
+<div class="relative z-10 p-8 h-full flex flex-col justify-end text-white">
+<h2 class="font-h2 text-h2 mb-2">Final Exams Week</h2>
+<p class="font-body-base text-body-base opacity-90 max-w-sm mb-6">Schedule verification is required for all departments by the end of today.</p>
+<button class="w-fit px-6 py-3 bg-white text-primary rounded-lg font-label-md hover:bg-opacity-90 transition-all active:scale-95">Review Schedule</button>
+</div>
+</div>
+<!-- Secondary List Card -->
+<div class="md:col-span-6 p-6 bg-white border border-outline-variant rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-h3 text-h3 text-on-surface">Upcoming Events</h3>
+<a class="text-primary text-label-md font-label-md hover:underline" href="#">View All</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="flex flex-col items-center justify-center w-12 h-12 rounded bg-tertiary-fixed text-on-tertiary-fixed font-bold leading-none">
+<span class="text-[10px] uppercase">Oct</span>
+<span class="text-lg">24</span>
+</div>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Annual Science Symposium</p>
+<p class="text-label-sm font-label-sm text-outline">Main Auditorium • 10:00 AM</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="flex flex-col items-center justify-center w-12 h-12 rounded bg-primary-fixed text-on-primary-fixed font-bold leading-none">
+<span class="text-[10px] uppercase">Oct</span>
+<span class="text-lg">26</span>
+</div>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Faculty Board Meeting</p>
+<p class="text-label-sm font-label-sm text-outline">Conference Room B • 2:00 PM</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Global Search Modal (Command Palette Style) -->
+<div class="fixed inset-0 z-[100] hidden" id="searchModal">
+<!-- Backdrop -->
+<div class="absolute inset-0 command-palette-backdrop" id="modalBackdrop"></div>
+<!-- Palette Container -->
+<div class="relative flex justify-center pt-[15vh] px-4 pointer-events-none">
+<div class="w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-outline-variant overflow-hidden pointer-events-auto animate-modal flex flex-col h-auto max-h-[70vh]">
+<!-- Search Input Header -->
+<div class="flex items-center px-6 py-4 border-b border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[24px]">search</span>
+<input autofocus="" class="flex-grow bg-transparent border-none focus:ring-0 text-on-surface font-body-base text-body-base px-4 placeholder:text-outline" id="mainSearchInput" placeholder="Search for students, faculty, or system tools..." type="text"/>
+<div class="flex items-center gap-1.5 px-2 py-1 bg-surface-container rounded-md border border-outline-variant/30 text-[10px] font-bold text-outline">
+                        ESC
+                    </div>
+</div>
+<!-- Results Area -->
+<div class="overflow-y-auto hide-scrollbar flex-grow py-4">
+<!-- Recent Section -->
+<section class="mb-6">
+<div class="px-6 mb-2 flex items-center justify-between">
+<h4 class="text-[11px] font-bold text-outline uppercase tracking-wider">Recently Viewed</h4>
+<button class="text-[10px] text-primary hover:underline">Clear History</button>
+</div>
+<div class="space-y-0.5">
+<div class="px-6 py-3 hover:bg-primary-fixed group cursor-pointer flex items-center gap-4 transition-colors">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">history</span>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Academic Calendar 2024</p>
+<p class="text-label-sm font-label-sm text-outline">Page • System</p>
+</div>
+<span class="text-[10px] text-outline opacity-0 group-hover:opacity-100 transition-opacity">Jump to</span>
+</div>
+<div class="px-6 py-3 hover:bg-primary-fixed group cursor-pointer flex items-center gap-4 transition-colors">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">person</span>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Dr. Aris Thorne</p>
+<p class="text-label-sm font-label-sm text-outline">Faculty • Computer Science</p>
+</div>
+<span class="text-[10px] text-outline opacity-0 group-hover:opacity-100 transition-opacity">Profile</span>
+</div>
+</div>
+</section>
+<!-- Categorized Results (Mock Search State) -->
+<section class="mb-2">
+<div class="px-6 mb-2">
+<h4 class="text-[11px] font-bold text-outline uppercase tracking-wider">Top Results</h4>
+</div>
+<!-- Categorized: Students -->
+<div class="group/category">
+<div class="px-6 py-1.5 bg-surface-container-low text-[10px] font-bold text-outline-variant uppercase">Students</div>
+<div class="px-6 py-3 hover:bg-primary-fixed group cursor-pointer flex items-center gap-4 transition-colors border-l-4 border-transparent hover:border-primary">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-primary">person_outline</span>
+</div>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Marcus Sterling <span class="text-outline font-normal">#2024-001</span></p>
+<p class="text-label-sm font-label-sm text-outline">Freshman • Engineering</p>
+</div>
+<div class="px-2 py-0.5 rounded bg-green-50 text-green-700 text-[10px] font-bold border border-green-200">Enrolled</div>
+</div>
+</div>
+<!-- Categorized: Faculty -->
+<div class="group/category mt-2">
+<div class="px-6 py-1.5 bg-surface-container-low text-[10px] font-bold text-outline-variant uppercase">Faculty</div>
+<div class="px-6 py-3 hover:bg-primary-fixed group cursor-pointer flex items-center gap-4 transition-colors border-l-4 border-transparent hover:border-primary">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-tertiary">school</span>
+</div>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Prof. Helena Volkov</p>
+<p class="text-label-sm font-label-sm text-outline">Head of Mathematics • Office 302</p>
+</div>
+</div>
+</div>
+<!-- Categorized: Courses -->
+<div class="group/category mt-2">
+<div class="px-6 py-1.5 bg-surface-container-low text-[10px] font-bold text-outline-variant uppercase">Courses</div>
+<div class="px-6 py-3 hover:bg-primary-fixed group cursor-pointer flex items-center gap-4 transition-colors border-l-4 border-transparent hover:border-primary">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">menu_book</span>
+</div>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">CS101: Introduction to AI</p>
+<p class="text-label-sm font-label-sm text-outline">Undergraduate • 4 Credits</p>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">open_in_new</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Command Footer -->
+<div class="px-6 py-3 bg-surface border-t border-outline-variant flex items-center gap-6">
+<div class="flex items-center gap-1.5">
+<span class="flex items-center justify-center w-5 h-5 bg-white border border-outline-variant rounded text-[10px] text-on-surface">
+<span class="material-symbols-outlined text-[12px]">keyboard_arrow_up</span>
+</span>
+<span class="flex items-center justify-center w-5 h-5 bg-white border border-outline-variant rounded text-[10px] text-on-surface">
+<span class="material-symbols-outlined text-[12px]">keyboard_arrow_down</span>
+</span>
+<span class="text-label-sm font-label-sm text-outline">Navigate</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="flex items-center justify-center w-8 h-5 bg-white border border-outline-variant rounded text-[10px] font-bold text-on-surface">Enter</span>
+<span class="text-label-sm font-label-sm text-outline">Select</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="flex items-center justify-center w-5 h-5 bg-white border border-outline-variant rounded text-[10px] text-on-surface">#</span>
+<span class="text-label-sm font-label-sm text-outline">Filter Category</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        const searchButton = document.getElementById('searchButton');
+        const searchModal = document.getElementById('searchModal');
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const mainSearchInput = document.getElementById('mainSearchInput');
+
+        function openSearch() {
+            searchModal.classList.remove('hidden');
+            mainSearchInput.focus();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSearch() {
+            searchModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        searchButton.addEventListener('click', openSearch);
+        modalBackdrop.addEventListener('click', closeSearch);
+
+        // Keyboard Shortcuts
+        window.addEventListener('keydown', (e) => {
+            // CTRL + K to open
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                openSearch();
+            }
+            // ESC to close
+            if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
+                closeSearch();
+            }
+        });
+
+        // Simple filter simulation
+        mainSearchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const items = searchModal.querySelectorAll('.group\\/category > div:not(.bg-surface-container-low)');
+            
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Hide headers if category is empty
+            const categories = searchModal.querySelectorAll('.group\\/category');
+            categories.forEach(cat => {
+                const visibleItems = Array.from(cat.children).filter(child => !child.classList.contains('bg-surface-container-low') && child.style.display !== 'none');
+                const header = cat.querySelector('.bg-surface-container-low');
+                if (visibleItems.length === 0) {
+                    header.style.display = 'none';
+                } else {
+                    header.style.display = 'block';
+                }
+            });
+        });
+
+        // Initial Focus Logic
+        setTimeout(() => {
+            // Visual trigger for help
+            searchButton.classList.add('ring-2', 'ring-primary/20');
+            setTimeout(() => searchButton.classList.remove('ring-2', 'ring-primary/20'), 1500);
+        }, 1000);
+    </script>
+</body></html>

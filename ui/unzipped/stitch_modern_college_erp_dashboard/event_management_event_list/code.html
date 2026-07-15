@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduCore ERP - Event Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcc6",
+                    "surface-container-low": "#eff4ff",
+                    "on-primary-fixed": "#001a42",
+                    "on-primary": "#ffffff",
+                    "outline": "#727785",
+                    "inverse-surface": "#213145",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#fefcff",
+                    "on-primary-fixed-variant": "#004395",
+                    "secondary-container": "#dae2fd",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#dce9ff",
+                    "surface-container": "#e5eeff",
+                    "surface": "#f8f9ff",
+                    "outline-variant": "#c2c6d6",
+                    "on-background": "#0b1c30",
+                    "surface-container-highest": "#d3e4fe",
+                    "inverse-primary": "#adc6ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "background": "#f8f9ff",
+                    "secondary": "#565e74",
+                    "tertiary": "#924700",
+                    "surface-dim": "#cbdbf5",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-variant": "#d3e4fe",
+                    "primary-container": "#2170e4",
+                    "on-secondary-container": "#5c647a",
+                    "surface-tint": "#005ac2",
+                    "tertiary-container": "#b75b00",
+                    "on-tertiary-container": "#fffbff",
+                    "on-tertiary-fixed": "#311400",
+                    "on-secondary-fixed": "#131b2e",
+                    "on-surface-variant": "#424754",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#d8e2ff",
+                    "primary": "#0058be",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "on-surface": "#0b1c30",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "48px",
+                    "unit": "4px",
+                    "container-padding": "32px",
+                    "gutter": "24px",
+                    "element-gap": "12px"
+            },
+            "fontFamily": {
+                    "h3": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h2": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: #f8f9ff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d3e4fe;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center h-16 px-container-padding w-full">
+<div class="flex items-center gap-element-gap">
+<span class="font-h3 text-h3 font-bold text-primary dark:text-primary-fixed-dim">EduSaaS ERP</span>
+</div>
+<div class="hidden md:flex flex-1 max-w-md mx-8">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-lg border-none focus:ring-2 focus:ring-primary text-body-base font-body-base" placeholder="Global Search" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="flex items-center gap-element-gap">
+<button class="material-symbols-outlined text-on-secondary-fixed-variant hover:bg-surface-container-low p-2 rounded-full transition-colors cursor-pointer active:scale-95">notifications</button>
+<button class="material-symbols-outlined text-on-secondary-fixed-variant hover:bg-surface-container-low p-2 rounded-full transition-colors cursor-pointer active:scale-95">chat_sparkle</button>
+<button class="material-symbols-outlined text-on-secondary-fixed-variant hover:bg-surface-container-low p-2 rounded-full transition-colors cursor-pointer active:scale-95">help</button>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary-fixed overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a college administrator, middle-aged with a warm smile, wearing a navy blue blazer and spectacles. The background is a blurred academic office with books and soft lighting, maintaining the blue and white color palette of the ERP." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd0XFCSBhIoWaI3GJoJCwA0Ho2GZkneggI7jWWEuDLvvjN3_w3VT7a-BtPOMHqdWS1629EIEFzxXvSpUl1KepzH3tvME9BIKXqe5QZwoPBkDgOCRvjqVCH7Hue3fC7Js5HU47ymyL_WdeKZsp-bnJrk_hVQ9Sk0G3Beo5Xvd8WOPLsGZnrpbZhgnkOkPlWlsbIpKFbdOXK4rIP4-YznhUaXpHQ0hV-fJ3GFkSX0EuXIWm0kWacIhTx"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-72 bg-surface-container-lowest dark:bg-surface-dim border-r border-outline-variant dark:border-outline flex flex-col py-4 overflow-y-auto custom-scrollbar hidden lg:flex">
+<div class="px-6 mb-6">
+<div class="flex items-center gap-element-gap">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-primary">Administration</p>
+<p class="text-[10px] text-secondary font-medium tracking-wider uppercase">Academic Year 2024-25</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 transition-all text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 transition-all text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-md text-label-md">Academic Calendar</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 transition-all bg-secondary-container text-on-secondary-fixed font-semibold rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-label-md text-label-md">Event Management</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 transition-all text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Student Directory</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 transition-all text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-md text-label-md">Faculty Records</span>
+</a>
+<a class="flex items-center gap-element-gap p-3 mx-2 my-1 transition-all text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-label-md text-label-md">System Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pb-4">
+<div class="p-4 bg-primary-fixed rounded-xl mb-6">
+<p class="font-label-sm text-label-sm text-on-primary-fixed-variant mb-2">Quick Actions</p>
+<button class="w-full py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md shadow-md active:scale-95 transition-transform">Create Report</button>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-element-gap p-2 mx-2 transition-all text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="shield_lock">shield_lock</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+<a class="flex items-center gap-element-gap p-2 mx-2 transition-all text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-72 pt-24 px-container-padding pb-gutter min-h-screen">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-gutter mb-section-gap">
+<div>
+<h1 class="font-h1 text-h1 text-on-background">Event Management</h1>
+<p class="text-body-lg font-body-lg text-secondary mt-2">Oversee campus activities, scheduling, and attendance metrics.</p>
+</div>
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-label-md text-label-md shadow-lg hover:bg-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                Add Event
+            </button>
+</section>
+<!-- Stats Overview (Asymmetric) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-section-gap">
+<div class="md:col-span-1 bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-fixed rounded-lg">event_upcoming</span>
+<span class="text-label-sm font-label-sm text-secondary">This Month</span>
+</div>
+<h4 class="text-h2 font-h2 text-on-surface">24</h4>
+<p class="text-body-sm font-body-sm text-secondary">Total Events Scheduled</p>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-tertiary p-2 bg-tertiary-fixed rounded-lg">groups</span>
+<span class="text-label-sm font-label-sm text-secondary">Total Enrolled</span>
+</div>
+<h4 class="text-h2 font-h2 text-on-surface">1,482</h4>
+<p class="text-body-sm font-body-sm text-secondary">Expected Attendees</p>
+</div>
+<div class="md:col-span-2 relative overflow-hidden bg-primary p-6 rounded-xl shadow-md text-on-primary">
+
+<div class="relative z-10 flex h-full items-center justify-between">
+<div>
+<h4 class="text-h3 font-h3 mb-1">Upcoming Milestone</h4>
+<p class="text-body-base font-body-base opacity-90">International Science Symposium starts in 48h</p>
+</div>
+<button class="px-4 py-2 bg-on-primary text-primary rounded-lg font-label-md">View Details</button>
+</div>
+</div>
+</section>
+<!-- Filters and View Toggles -->
+<section class="bg-surface-container-lowest p-gutter rounded-xl border border-outline-variant mb-gutter flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
+<div class="relative min-w-[240px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant focus:ring-1 focus:ring-primary text-body-sm" placeholder="Search events, organizers..." type="text"/>
+</div>
+<div class="flex gap-2">
+<select class="bg-surface border border-outline-variant rounded-lg px-4 py-2 text-label-sm font-label-sm focus:ring-1 focus:ring-primary appearance-none pr-8">
+<option>All Categories</option>
+<option>Academic</option>
+<option>Cultural</option>
+<option>Sports</option>
+</select>
+<select class="bg-surface border border-outline-variant rounded-lg px-4 py-2 text-label-sm font-label-sm focus:ring-1 focus:ring-primary appearance-none pr-8">
+<option>All Status</option>
+<option>Upcoming</option>
+<option>Live</option>
+<option>Completed</option>
+</select>
+</div>
+</div>
+<div class="flex bg-surface-container rounded-lg p-1">
+<button class="p-2 rounded-md bg-surface-container-lowest shadow-sm text-primary transition-all" id="gridBtn" onclick="toggleView('grid')">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 rounded-md text-secondary hover:bg-surface-container-highest transition-all" id="tableBtn" onclick="toggleView('table')">
+<span class="material-symbols-outlined">table_chart</span>
+</button>
+</div>
+</section>
+<!-- Dynamic Content Area -->
+<div class="bento-grid" id="gridView">
+<!-- Event Card 1 -->
+<div class="glass-card rounded-xl p-6 hover:shadow-lg transition-all border border-outline-variant flex flex-col">
+<div class="relative h-48 rounded-lg overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center" data-alt="A vibrant shot of a university auditorium filled with students, captured in a professional wide-angle lens. The stage has multiple large screens displaying complex data visualizations. The lighting is cool-toned blue and white, reflecting a high-tech academic atmosphere with sleek minimalist details." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMZ6LUcCgbQVswIlcHfgyQvuMLZJ-52ER6XaS-yYp1y0A1IkREhUA7MMtRfFIhprXrNL56iwvaGgOa3d9bQkCvgZXUXVAAoWV92MZoVCWX3lFUI4CtSpe8qIG7OIYT-6m_78hPV8bow6nj0MekovtbeQJ-5SWNhBniUg02M-MvJe-1BwX2u0dzQL5huUyZvsV1mdXi96cPccc-RLg12bhMbntRlLTjbZQLtn2Bs4yTWjWOjF6bGIWV')"></div>
+<div class="absolute top-3 left-3 bg-primary text-on-primary px-3 py-1 rounded-full text-label-sm font-label-sm">Academic</div>
+<div class="absolute top-3 right-3 bg-on-surface-variant text-white px-3 py-1 rounded-full text-label-sm font-label-sm backdrop-blur-md bg-opacity-60">Upcoming</div>
+</div>
+<h3 class="text-h3 font-h3 text-on-surface mb-2">TechX Summit 2024</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4 line-clamp-2">Annual technology showcase featuring guest speakers from major tech hubs and student innovation projects.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant space-y-3">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="text-label-sm">Nov 12 - Nov 14, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-label-sm">Main Auditorium</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-slate-200">
+<img class="w-full h-full rounded-full object-cover" data-alt="Close-up portrait of a young college student with a diverse background, smiling naturally. Neutral academic setting with soft daylight and blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR45SjPom7FJ7Qkgav-nwf1TeggGlUmCwY7G9hQR5_GvS5VHbzNMAp6179tbdSkVGos8dJNguPMetS7H_pXpyCcJqP3GAHEgujzoGP_oB--Y3jsGQ-RRhQVgnahfNSUAS4vsPNbuiso5nisqASr9UFoG3ayXdPt6vYBCNN1sBqJL-RDAbBCjZvc8bpO1aYRY2cBY9fQgQtFQOwJg6t5wBXskSFX97fTjctDsLtR9x-JJQdA6UxMayJ"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-slate-300">
+<img class="w-full h-full rounded-full object-cover" data-alt="Close-up portrait of a female university faculty member, professional appearance, wearing modern academic attire. Studio lighting, clean blue and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq5LYd7ReRql3m4s2K-fpQaKzyhFBYcXIqq70S7c8sUAf-ZfNqne57F_o-I383ZYjAOmlQin8YpIgk0jQu1j6fKfnjm7PB6uaaBKvoagRHfXSlSeH7n4t3sAms9YYva3SLwQCXKba0ysqwyXdZPJvxMLWlZJHngp0TV5Q2MyKopk6p8ufceCuY5lmvM8kNSI_w4xG5loQqmcex3wlFTgTPznwQp8lEJgVAhzVck-e71QQ4yQHR_P06"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-primary-fixed flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">Manage <span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
+</div>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="glass-card rounded-xl p-6 hover:shadow-lg transition-all border border-outline-variant flex flex-col">
+<div class="relative h-48 rounded-lg overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center" data-alt="A lively outdoor university quad area during a cultural festival. Colorful banners are strung between trees, and students are gathered in clusters at various booths. The photography uses a soft focus for the background, emphasizing a warm, inviting, yet crisp professional aesthetic with vibrant yet controlled colors." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmEqdvwQl5OfXVBCcXkAicLb94Xyh6uFfBvJfyEOxZNhRBTvzCU20tWk1enT-NArMxe4GxPSwYgn4G7jgkusX1semsS35yy-7YCBX-Jjr-nyoOy_hI-Ej1K6JBqF-g647gP-Wr3g7MY3n7bljY5EJq3ebTjHZAVw_s6G4QGI-fKU-wxuv9-fDSPwGCXeosjutmGveDIDGHVu1l4NsvzxHWy6ZIfhrQ_cKi7AB24NkcgEgjg4vvIOJX')"></div>
+<div class="absolute top-3 left-3 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-label-sm font-label-sm">Cultural</div>
+<div class="absolute top-3 right-3 bg-error text-on-error px-3 py-1 rounded-full text-label-sm font-label-sm animate-pulse">Live</div>
+</div>
+<h3 class="text-h3 font-h3 text-on-surface mb-2">Heritage Gala Night</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4 line-clamp-2">A celebration of global cultures through dance, music, and traditional culinary exhibitions.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant space-y-3">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="text-label-sm">Oct 24, 2024 | 18:00</span>
+</div>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-label-sm">Open Air Theatre</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<span class="text-label-sm text-secondary">Enrolled: 342/400</span>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">Live Feed <span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
+</div>
+</div>
+</div>
+<!-- Event Card 3 -->
+<div class="glass-card rounded-xl p-6 hover:shadow-lg transition-all border border-outline-variant flex flex-col">
+<div class="relative h-48 rounded-lg overflow-hidden mb-4">
+<div class="w-full h-full bg-cover bg-center" data-alt="A modern university gymnasium with professional lighting. A basketball game is in progress, but the focus is on the sleek architectural details of the sports complex. The color palette is dominated by primary blues and crisp whites, giving it an elite collegiate sports feel." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrHQzsOzVkcnlRw4TngnjbpXpeSCDJk4MMwxxL24Ydt-R5-OtvTcpt62w3I9TfKVPM5kMk8mWyi_jy--6-PuqhETlUxWjF8eclu2-HA2ClZxaLbE5_vHwxa620J3nrjSfN2SSKy2CNm8bxjoWfrhAA82qf_oN6k8L4-6P6xwlmeax6qsB8GhHHX-4Mfra4I_m53PAphMVlCL6b13380GQ0teHvvjoN_BPkvk4rE3BYCZzysmKCjmTA')"></div>
+<div class="absolute top-3 left-3 bg-secondary text-on-secondary px-3 py-1 rounded-full text-label-sm font-label-sm">Sports</div>
+<div class="absolute top-3 right-3 bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full text-label-sm font-label-sm">Completed</div>
+</div>
+<h3 class="text-h3 font-h3 text-on-surface mb-2">Inter-Varsity Athletics</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4 line-clamp-2">Regional track and field competition hosted at EduCore Stadium involving 12 visiting universities.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant space-y-3">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="text-label-sm">Sep 15, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">workspace_premium</span>
+<span class="text-label-sm">Winners: Crimson Lions</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<span class="text-label-sm text-secondary">Feedback: 4.8/5.0</span>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">Archive <span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Table View (Hidden by default) -->
+<div class="hidden overflow-x-auto bg-surface-container-lowest rounded-xl border border-outline-variant" id="tableView">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant border-b border-outline-variant">
+<th class="px-6 py-4 font-label-md text-label-md">Event Name</th>
+<th class="px-6 py-4 font-label-md text-label-md">Category</th>
+<th class="px-6 py-4 font-label-md text-label-md">Date &amp; Time</th>
+<th class="px-6 py-4 font-label-md text-label-md">Location</th>
+<th class="px-6 py-4 font-label-md text-label-md">Enrollment</th>
+<th class="px-6 py-4 font-label-md text-label-md">Status</th>
+<th class="px-6 py-4 font-label-md text-label-md">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-body-base text-body-base font-semibold">TechX Summit 2024</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-primary-fixed text-primary rounded text-[10px] font-bold uppercase">Academic</span>
+</td>
+<td class="px-6 py-4 text-body-sm text-secondary">Nov 12, 09:00 AM</td>
+<td class="px-6 py-4 text-body-sm text-secondary">Auditorium A</td>
+<td class="px-6 py-4 text-body-sm text-secondary">156/200</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant rounded text-[10px] font-bold uppercase">Upcoming</span>
+</td>
+<td class="px-6 py-4">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-body-base text-body-base font-semibold">Heritage Gala Night</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-tertiary-fixed text-tertiary rounded text-[10px] font-bold uppercase">Cultural</span>
+</td>
+<td class="px-6 py-4 text-body-sm text-secondary">Oct 24, 06:00 PM</td>
+<td class="px-6 py-4 text-body-sm text-secondary">OAT Quad</td>
+<td class="px-6 py-4 text-body-sm text-secondary">342/400</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-error-container text-error rounded text-[10px] font-bold uppercase">Live</span>
+</td>
+<td class="px-6 py-4">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+<!-- Mobile Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container-lowest border-t border-outline-variant z-50 flex justify-around items-center">
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event_available</span>
+<span class="text-[10px] font-medium">Events</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium">Directory</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">More</span>
+</button>
+</nav>
+<script>
+        function toggleView(view) {
+            const gridView = document.getElementById('gridView');
+            const tableView = document.getElementById('tableView');
+            const gridBtn = document.getElementById('gridBtn');
+            const tableBtn = document.getElementById('tableBtn');
+
+            if (view === 'grid') {
+                gridView.classList.remove('hidden');
+                tableView.classList.add('hidden');
+                gridBtn.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                gridBtn.classList.remove('text-secondary');
+                tableBtn.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                tableBtn.classList.add('text-secondary');
+            } else {
+                gridView.classList.add('hidden');
+                tableView.classList.remove('hidden');
+                tableBtn.classList.add('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                tableBtn.classList.remove('text-secondary');
+                gridBtn.classList.remove('bg-surface-container-lowest', 'shadow-sm', 'text-primary');
+                gridBtn.classList.add('text-secondary');
+            }
+        }
+    </script>
+</body></html>

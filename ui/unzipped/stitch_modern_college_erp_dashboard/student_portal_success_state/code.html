@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Successful - EduCore ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#424754",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-primary-fixed": "#001a42",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "secondary-container": "#dae2fd",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#924700",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "surface-variant": "#d3e4fe",
+                    "secondary-fixed": "#dae2fd",
+                    "on-background": "#0b1c30",
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-container": "#e5eeff",
+                    "outline-variant": "#c2c6d6",
+                    "on-tertiary-container": "#fffbff",
+                    "primary": "#0058be",
+                    "surface-container-low": "#eff4ff",
+                    "on-secondary-container": "#5c647a",
+                    "background": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#213145",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed": "#311400",
+                    "primary-container": "#2170e4",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#b75b00",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#005ac2",
+                    "outline": "#727785",
+                    "surface": "#f8f9ff",
+                    "secondary": "#565e74",
+                    "inverse-primary": "#adc6ff",
+                    "surface-bright": "#f8f9ff",
+                    "on-surface": "#0b1c30",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-container": "#fefcff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "tertiary-fixed": "#ffdcc6",
+                    "surface-dim": "#cbdbf5",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "48px",
+                    "gutter": "24px",
+                    "container-padding": "32px",
+                    "unit": "4px",
+                    "element-gap": "12px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h1": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "h3": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["36px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "h1-mobile": ["30px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "h2": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .confetti-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar (As per JSON) -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 overflow-y-auto bg-surface-container-low border-r border-outline-variant flex flex-col p-gutter z-50">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<h1 class="text-h3 font-h3 font-bold text-primary">EduCore ERP</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant">SaaS Admin Portal</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md font-label-md">Students</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg group" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-md font-label-md">Fees</span>
+</a>
+<!-- Simplified others for UI focus -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-label-md font-label-md">Assignments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-6">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Help Center</span>
+</a>
+<button class="w-full mt-4 bg-primary-container text-on-primary-container py-2.5 rounded-lg text-label-md font-label-md transition-transform active:scale-95">
+                Support
+            </button>
+</div>
+</aside>
+<!-- Top Navigation -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface border-b border-outline-variant shadow-sm z-40 flex justify-between items-center px-container-padding">
+<div class="flex items-center gap-4 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant w-96">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full" placeholder="Search for payments, invoices, or help..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors active:opacity-80">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer active:opacity-80">
+<div class="text-right">
+<p class="text-label-md font-label-md font-bold text-primary">Admin</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Academic Head</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary-fixed overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a university administrator in a clean white office setting, wearing a sharp navy blue blazer. The lighting is bright and airy, reflecting a modern academic environment with soft blue accents in the background. High-quality corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtJK9zdLnQxcy5PGr29n5rTV5C5GjhYuXOzmlvYNkfeGHgE_RaOtvbmF0It71zdGx1fTJV-SncVf1Y_NHkTvrOrSZaxVBMpYJy375Ke9T9xQ5XBFWIXjUiL4WYrkoaZaSOHiD4jnv4ZOh6fGwXD7fM9i4YIbeQ8EKHRLMytFTN8dfGWY3uIPkMX4Zte3LqPina2zinmuUMcTb25nVPhs-s7UBGY8ufKpqAygHTqKwTlWOPG5Aj0OSU"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] pt-16 min-h-screen bg-background relative">
+<div class="p-container-padding max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-8">
+<h2 class="text-h2 font-h2 text-on-background">Fee Management</h2>
+<p class="text-body-base font-body-base text-on-surface-variant">Overview of your academic financial standing</p>
+</div>
+<!-- Bento Grid Content (Mocked background dashboard) -->
+<div class="grid grid-cols-12 gap-gutter opacity-40 blur-[1px] pointer-events-none">
+<div class="col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 h-[400px]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-h3 font-h3">Recent Transactions</h3>
+<div class="text-primary font-label-md">View Statement</div>
+</div>
+<!-- Mock Table -->
+<div class="space-y-4">
+<div class="flex justify-between p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<div class="flex gap-4 items-center">
+<div class="w-10 h-10 bg-surface rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-primary">description</span></div>
+<div>
+<p class="text-label-md font-label-md">Sem 5 - Tuition Fees</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Paid on Oct 12, 2023</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-label-md font-label-md font-bold">$2,450.00</p>
+<p class="text-label-sm font-label-sm text-primary">Receipt #5521</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-4 bg-primary text-on-primary rounded-xl p-6 h-[400px]">
+<h3 class="text-h3 font-h3 mb-4">Balance Due</h3>
+<p class="text-[48px] font-bold mb-2">$0.00</p>
+<p class="text-primary-fixed text-body-sm mb-8">All accounts are settled for current semester.</p>
+<div class="bg-primary-container p-4 rounded-lg">
+<p class="text-label-sm font-label-sm opacity-80">Next Due Date</p>
+<p class="text-label-md font-label-md font-bold">Jan 15, 2024</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Success Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4" id="successModal">
+<div class="absolute inset-0 bg-on-background/60 backdrop-blur-sm"></div>
+<canvas class="confetti-canvas" id="confetti"></canvas>
+<div class="relative bg-surface-container-lowest border border-outline-variant rounded-xl shadow-xl w-full max-w-lg overflow-hidden transform transition-all animate-float">
+<!-- Top Decoration -->
+<div class="h-2 bg-primary"></div>
+<div class="p-8 text-center">
+<!-- Success Icon -->
+<div class="w-20 h-20 bg-primary-fixed text-primary rounded-full flex items-center justify-center mx-auto mb-6 scale-110 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'wght' 700;">check_circle</span>
+</div>
+<h2 class="text-h2 font-h2 text-on-surface mb-2">Payment Successful!</h2>
+<p class="text-body-base font-body-base text-on-surface-variant mb-8">Your transaction has been processed successfully.</p>
+<!-- Transaction Details Card -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-6 mb-8 text-left space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Transaction ID</span>
+<span class="text-label-md font-label-md font-bold text-on-surface">#TRX-992031-EDC</span>
+</div>
+<div class="h-px bg-outline-variant"></div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Amount Paid</span>
+<span class="text-h3 font-h3 text-primary">$1,250.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Date &amp; Time</span>
+<span class="text-label-md font-label-md text-on-surface">Oct 24, 2023 | 02:45 PM</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Payment Method</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">credit_card</span>
+<span class="text-label-md font-label-md text-on-surface">Visa •••• 4242</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary py-3.5 rounded-lg font-bold transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                            Download Receipt
+                        </button>
+<button class="w-full py-3.5 text-primary hover:bg-primary-fixed/30 rounded-lg font-label-md transition-all active:scale-[0.98]" onclick="window.location.reload()">
+                            Return to Dashboard
+                        </button>
+</div>
+</div>
+<!-- Footer Text -->
+<div class="bg-surface-container p-4 text-center">
+<p class="text-label-sm font-label-sm text-on-surface-variant">
+                        A confirmation email has been sent to student@university.edu
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (As per JSON) -->
+<footer class="ml-[280px] w-[calc(100%-280px)] py-6 mt-auto border-t border-outline-variant bg-surface-container-lowest">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-padding max-w-7xl mx-auto">
+<div class="mb-4 md:mb-0">
+<p class="text-label-md font-label-md font-bold text-primary">EduCore ERP</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">© 2024 EduCore SaaS ERP. All rights reserved.</p>
+</div>
+<div class="flex gap-6">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Confetti Effect
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let pieces = [];
+        const numberOfPieces = 150;
+        const colors = ['#0058be', '#2170e4', '#adc6ff', '#d8e2ff', '#ffffff'];
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (pieces.length < numberOfPieces) {
+                pieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    rotation: Math.random() * 360,
+                    size: Math.random() * 10 + 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 3 + 2,
+                    oscillation: Math.random() * 0.1
+                });
+            }
+
+            pieces.forEach((p, i) => {
+                p.y += p.speed;
+                p.rotation += p.speed;
+                p.x += Math.sin(p.y * p.oscillation);
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                ctx.restore();
+
+                if (p.y > canvas.height) {
+                    pieces[i].y = -20;
+                    pieces[i].x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(update);
+        }
+
+        update();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body></html>
