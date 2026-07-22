@@ -1,31 +1,49 @@
 import * as React from "react";
-import { Users, GraduationCap, Building2, CalendarDays } from "lucide-react";
+import { Users, Building2, CalendarDays } from "lucide-react";
+import prisma from "@/lib/prisma";
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  let facultyCount = 0;
+  let departmentCount = 0;
+  let eventCount = 0;
+
+  try {
+    const [fCount, dCount, eCount] = await Promise.all([
+      prisma.faculty.count(),
+      prisma.department.count(),
+      prisma.event.count({
+        where: {
+          eventDate: {
+            gte: new Date(),
+          },
+        },
+      }),
+    ]);
+    facultyCount = fCount;
+    departmentCount = dCount;
+    eventCount = eCount;
+  } catch (error) {
+    console.error("Failed to fetch dashboard stats from database:", error);
+  }
+
   const stats = [
     {
-      label: "Total Students",
-      value: "1,248",
-      icon: GraduationCap,
-      change: "+12% from last year",
-    },
-    {
       label: "Total Faculty",
-      value: "84",
+      value: facultyCount.toLocaleString(),
       icon: Users,
-      change: "Active across 6 departments",
+      change: `Teaching across ${departmentCount} departments`,
     },
     {
       label: "Departments",
-      value: "6",
+      value: departmentCount.toLocaleString(),
       icon: Building2,
-      change: "Engineering, Sci, Mgmt",
+      change: "Academic divisions active",
     },
     {
       label: "Upcoming Events",
-      value: "4",
+      value: eventCount.toLocaleString(),
       icon: CalendarDays,
-      change: "Scheduled this month",
+      change: "Scheduled upcoming events",
     },
   ];
 
@@ -42,7 +60,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Cards Grid */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (

@@ -24,6 +24,7 @@ export default function SignInPage() {
             elements: {
               rootBox: "w-full",
               card: "rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm p-0 w-full",
+              main: "p-8",
               headerTitle: "hidden",
               headerSubtitle: "hidden",
               socialButtonsBlockButton:

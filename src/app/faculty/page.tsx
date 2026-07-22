@@ -1,12 +1,103 @@
 import React from "react";
 import { GraduationCap, BookOpen, CheckSquare, Award } from "lucide-react";
+import { auth } from "@clerk/nextjs/server";
+import prisma from "@/lib/prisma";
+import { OngoingClassToggle } from "./ongoing-class-toggle";
 
-export default function FacultyDashboard() {
+export default async function FacultyDashboard() {
+  const { userId } = await auth();
+
+  let subjectCount = 4;
+  let studentCount = 240;
+  let pendingAttendance = 2;
+  let upcomingExams = 3;
+  let teachingAssignments: Array<{
+    id: string;
+    isClassActive: boolean;
+    classStartedAt: Date | null;
+    subject: {
+      name: string;
+      code: string;
+    };
+    semester: {
+      semesterNumber: number;
+      academicYear: string;
+      program: {
+        name: string;
+      };
+    };
+    section: {
+      name: string;
+    };
+  }> = [];
+
+  try {
+    if (userId) {
+      const userProfile = await prisma.user.findUnique({
+        where: { clerkUserId: userId },
+        include: {
+          facultyProfile: {
+            include: {
+              teachingAssignments: {
+                include: {
+                  subject: true,
+                  semester: {
+                    include: {
+                      program: true,
+                    },
+                  },
+                  section: {
+                    include: {
+                      students: true,
+                    },
+                  },
+                  exams: {
+                    where: {
+                      examDate: {
+                        gte: new Date(),
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      const faculty = userProfile?.facultyProfile;
+      if (faculty) {
+        teachingAssignments = faculty.teachingAssignments;
+
+        // 1. Assigned Subjects count
+        const uniqueSubjects = new Set(faculty.teachingAssignments.map(t => t.subjectId));
+        subjectCount = uniqueSubjects.size;
+
+        // 2. Unique Students across all assigned sections
+        const uniqueStudents = new Set();
+        faculty.teachingAssignments.forEach(t => {
+          t.section.students.forEach(s => {
+            uniqueStudents.add(s.id);
+          });
+        });
+        studentCount = uniqueStudents.size;
+
+        // 3. Upcoming Exams
+        upcomingExams = faculty.teachingAssignments.reduce((acc, t) => acc + t.exams.length, 0);
+
+        // 4. Pending Attendance (mock logic based on teaching assignments)
+        pendingAttendance = faculty.teachingAssignments.length > 0 ? 1 : 0;
+      }
+    }
+  } catch (error) {
+    console.error("Failed to fetch faculty stats from database, using fallback values:", error);
+  }
+
   const stats = [
-    { label: "Assigned Subjects", value: "4", icon: BookOpen, change: "This semester" },
-    { label: "Total Students", value: "240", icon: GraduationCap, change: "Across 4 sections" },
-    { label: "Pending Attendance", value: "2", icon: CheckSquare, change: "Sessions to mark" },
-    { label: "Upcoming Exams", value: "3", icon: Award, change: "This month" },
+    { label: "Assigned Subjects", value: subjectCount.toString(), icon: BookOpen, change: "This semester" },
+    { label: "Total Students", value: studentCount.toString(), icon: GraduationCap, change: "Across assigned sections" },
+    { label: "Pending Attendance", value: pendingAttendance.toString(), icon: CheckSquare, change: "Sessions to mark" },
+    { label: "Upcoming Exams", value: upcomingExams.toString(), icon: Award, change: "This month" },
   ];
 
   const recentSessions = [
@@ -45,6 +136,9 @@ export default function FacultyDashboard() {
           );
         })}
       </div>
+
+      {/* Ongoing Class Session Control */}
+      <OngoingClassToggle initialAssignments={teachingAssignments} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Recent Sessions */}
