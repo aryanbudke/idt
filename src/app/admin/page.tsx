@@ -2,6 +2,8 @@ import * as React from "react";
 import { Users, Building2, CalendarDays } from "lucide-react";
 import prisma from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboard() {
   let facultyCount = 0;
   let departmentCount = 0;
