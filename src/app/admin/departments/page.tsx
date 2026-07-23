@@ -21,10 +21,6 @@ export default async function DepartmentsPage({ searchParams }: PageProps) {
   );
   const faculties = await getFacultyList();
 
-  // Calculate stats for bento grids (explicitly type callback parameter)
-  const activeCount = departments.filter((d: { status: string }) => d.status === "ACTIVE").length;
-  const inactiveCount = departments.filter((d: { status: string }) => d.status === "INACTIVE").length;
-
   return (
     <DepartmentClient
       initialDepartments={departments}
@@ -33,8 +29,6 @@ export default async function DepartmentsPage({ searchParams }: PageProps) {
       totalCount={totalCount}
       initialSearch={search}
       initialPage={page}
-      activeCount={activeCount}
-      inactiveCount={inactiveCount}
     />
   );
 }

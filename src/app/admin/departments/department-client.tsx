@@ -71,8 +71,6 @@ interface DepartmentClientProps {
   totalCount: number;
   initialSearch: string;
   initialPage: number;
-  activeCount: number;
-  inactiveCount: number;
 }
 
 export function DepartmentClient({
@@ -82,8 +80,6 @@ export function DepartmentClient({
   totalCount,
   initialSearch,
   initialPage,
-  activeCount,
-  inactiveCount,
 }: DepartmentClientProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -239,16 +235,20 @@ export function DepartmentClient({
         <div className="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex flex-col justify-between hover:shadow-lg transition-shadow">
           <CheckCircle2 className="text-emerald-600 h-8 w-8 mb-4" />
           <div>
-            <p className="text-label-sm font-label-sm text-on-surface-variant">Active Status</p>
-            <h4 className="text-h3 font-h3 font-bold text-on-surface mt-1">{activeCount}</h4>
+            <p className="text-label-sm font-label-sm text-on-surface-variant">Active Departments</p>
+            <h4 className="text-body-sm font-bold text-on-surface mt-1">
+              {initialDepartments.filter(d => d.status === "ACTIVE").map(d => d.name).join(", ") || "None"}
+            </h4>
           </div>
         </div>
 
         <div className="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex flex-col justify-between hover:shadow-lg transition-shadow">
           <AlertCircle className="text-error h-8 w-8 mb-4" />
           <div>
-            <p className="text-label-sm font-label-sm text-on-surface-variant">Inactive Status</p>
-            <h4 className="text-h3 font-h3 font-bold text-on-surface mt-1">{inactiveCount}</h4>
+            <p className="text-label-sm font-label-sm text-on-surface-variant">Inactive Departments</p>
+            <h4 className="text-body-sm font-bold text-on-surface mt-1">
+              {initialDepartments.filter(d => d.status === "INACTIVE").map(d => d.name).join(", ") || "None"}
+            </h4>
           </div>
         </div>
       </div>

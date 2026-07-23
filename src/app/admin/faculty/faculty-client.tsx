@@ -107,10 +107,10 @@ export function FacultyClient({ initialFaculty, departments, totalPages, totalCo
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="border-b border-outline-variant bg-surface-container-low">
-              <tr>{["ID", "Name", "Department", "Designation", "Email", "Joining Date", "Status", "Actions"].map(h => <th key={h} className="px-4 py-3 text-left text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">{h}</th>)}</tr>
+              <tr>{["ID", "Name", "Department", "Designation", "Email", "Status", "Actions"].map(h => <th key={h} className="px-4 py-3 text-left text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">{h}</th>)}</tr>
             </thead>
             <tbody className="divide-y divide-outline-variant">
-              {initialFaculty.length === 0 ? <tr><td colSpan={8} className="py-16 text-center text-on-surface-variant">No faculty members found.</td></tr>
+              {initialFaculty.length === 0 ? <tr><td colSpan={7} className="py-16 text-center text-on-surface-variant">No faculty members found.</td></tr>
                 : initialFaculty.map(f => (
                   <tr key={f.id} className="hover:bg-surface-container-low/50 transition-colors">
                     <td className="px-4 py-3"><span className="rounded bg-secondary-container px-2 py-0.5 text-xs font-bold text-on-secondary-container">{f.facultyId}</span></td>
@@ -118,7 +118,6 @@ export function FacultyClient({ initialFaculty, departments, totalPages, totalCo
                     <td className="px-4 py-3 text-on-surface-variant">{f.department.name}</td>
                     <td className="px-4 py-3 text-on-surface-variant">{f.designation}</td>
                     <td className="px-4 py-3 text-on-surface-variant">{f.email}</td>
-                    <td className="px-4 py-3 text-on-surface-variant">{new Date(f.joiningDate).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</td>
                     <td className="px-4 py-3">{statusBadge(f.status)}</td>
                     <td className="px-4 py-3"><div className="flex gap-2">
                       <button onClick={() => openEdit(f)} className="rounded-md p-1.5 text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors"><Pencil className="h-4 w-4" /></button>
@@ -163,7 +162,6 @@ export function FacultyClient({ initialFaculty, departments, totalPages, totalCo
                 </div>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
-                <div><label className="mb-1.5 block text-label-sm font-medium text-on-surface-variant">Joining Date *</label><input type="date" {...form.register("joiningDate")} className="w-full rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm focus:border-primary focus:outline-none" /></div>
                 <div><label className="mb-1.5 block text-label-sm font-medium text-on-surface-variant">Status</label><select {...form.register("status")} className="w-full rounded-lg border border-outline-variant bg-surface px-3 py-2 text-sm focus:border-primary focus:outline-none"><option value="ACTIVE">Active</option><option value="ON_LEAVE">On Leave</option><option value="RESIGNED">Resigned</option></select></div>
               </div>
               <div className="flex justify-end gap-3 pt-2">

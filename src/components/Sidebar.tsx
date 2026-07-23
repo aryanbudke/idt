@@ -8,14 +8,12 @@ import {
   LayoutGrid,
   School,
   Users,
-  Briefcase,
   CheckSquare,
   Clock,
   Award,
   FileEdit,
   Megaphone,
   CalendarDays,
-  Settings,
   GraduationCap as LogoIcon,
 } from "lucide-react";
 import { SidebarItem } from "./SidebarItem";
@@ -30,17 +28,11 @@ export const getSidebarItems = (role: "admin" | "faculty" | "student") => {
         { label: "Classrooms", href: "/admin/classrooms", icon: School },
         { label: "Faculty", href: "/admin/faculty", icon: Users },
         {
-          label: "Teaching Assignments",
-          href: "/admin/teaching-assignments",
-          icon: Briefcase,
-        },
-        {
           label: "Announcements",
           href: "/admin/announcements",
           icon: Megaphone,
         },
         { label: "Events", href: "/admin/events", icon: CalendarDays },
-        { label: "Settings", href: "/admin/settings", icon: Settings },
       ];
     case "faculty":
       return [

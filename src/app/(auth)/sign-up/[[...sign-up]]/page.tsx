@@ -4,7 +4,7 @@ import { GraduationCap } from "lucide-react";
 export default function SignUpPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-[400px]">
         {/* Brand Header */}
         <div className="mb-8 flex flex-col items-center gap-3">
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-on-primary shadow-lg">
@@ -21,10 +21,20 @@ export default function SignUpPage() {
         {/* Clerk Sign-Up Component */}
         <SignUp
           appearance={{
+            variables: {
+              colorBackground: "var(--surface-container-lowest)",
+              colorText: "var(--on-surface)",
+              colorTextSecondary: "var(--on-surface-variant)",
+              colorPrimary: "var(--primary)",
+              colorInputBackground: "var(--surface)",
+              colorInputText: "var(--on-surface)",
+            },
             elements: {
               rootBox: "w-full",
               card: "rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm p-0 w-full",
-              main: "p-8",
+              main: "px-8 py-6",
+              footer: "bg-surface-container-low rounded-b-xl border-t border-outline-variant px-8 py-4",
+              footerAction: "text-on-surface-variant",
               headerTitle: "hidden",
               headerSubtitle: "hidden",
               socialButtonsBlockButton:

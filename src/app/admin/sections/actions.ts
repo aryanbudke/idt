@@ -4,9 +4,9 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 
 const MOCK_SECTIONS = [
-  { id: "mock-sec-a", semesterId: "mock-sem-1", semester: { semesterNumber: 1, academicYear: "2024-25", program: { name: "BE-CS", code: "BE-CS" } }, name: "Section A", capacity: 60 },
-  { id: "mock-sec-b", semesterId: "mock-sem-1", semester: { semesterNumber: 1, academicYear: "2024-25", program: { name: "BE-CS", code: "BE-CS" } }, name: "Section B", capacity: 60 },
-  { id: "mock-sec-c", semesterId: "mock-sem-2", semester: { semesterNumber: 2, academicYear: "2024-25", program: { name: "BE-CS", code: "BE-CS" } }, name: "Section A", capacity: 55 },
+  { id: "mock-sec-a", semesterId: "mock-sem-1", semester: { semesterNumber: 1, academicYear: "2024-25", program: { name: "BE-CS", code: "BE-CS" } }, name: "Section A", capacity: 60, teachingAssignments: [] },
+  { id: "mock-sec-b", semesterId: "mock-sem-1", semester: { semesterNumber: 1, academicYear: "2024-25", program: { name: "BE-CS", code: "BE-CS" } }, name: "Section B", capacity: 60, teachingAssignments: [] },
+  { id: "mock-sec-c", semesterId: "mock-sem-2", semester: { semesterNumber: 2, academicYear: "2024-25", program: { name: "BE-CS", code: "BE-CS" } }, name: "Section A", capacity: 55, teachingAssignments: [] },
 ];
 
 const MOCK_SEMESTERS_LIST = [
@@ -20,7 +20,19 @@ export async function getSections(search = "", page = 1, limit = 5) {
     const skip = (page - 1) * limit;
     const where = search ? { name: { contains: search, mode: "insensitive" as const } } : {};
     const [sections, totalCount] = await Promise.all([
-      prisma.section.findMany({ where, include: { semester: { include: { program: true } } }, orderBy: { name: "asc" }, skip, take: limit }),
+      prisma.section.findMany({
+        where,
+        include: {
+          semester: { include: { program: true } },
+          teachingAssignments: {
+            where: { isClassActive: true },
+            include: { subject: true },
+          },
+        },
+        orderBy: { name: "asc" },
+        skip,
+        take: limit,
+      }),
       prisma.section.count({ where }),
     ]);
     return { sections, totalPages: Math.ceil(totalCount / limit) || 1, totalCount };

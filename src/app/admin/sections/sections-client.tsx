@@ -15,7 +15,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 interface SemesterItem { id: string; semesterNumber: number; academicYear: string; program: { name: string; code: string } }
-interface Section { id: string; semesterId: string; semester: { semesterNumber: number; academicYear: string; program: { name: string; code: string } }; name: string; capacity: number }
+interface Section { id: string; semesterId: string; semester: { semesterNumber: number; academicYear: string; program: { name: string; code: string } }; name: string; capacity: number; teachingAssignments?: { isClassActive: boolean; subject: { name: string; code: string } }[] }
 
 interface Props {
   initialSections: Section[];
@@ -76,7 +76,7 @@ export function SectionsClient({ initialSections, semesters, totalPages, totalCo
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="border-b border-outline-variant bg-surface-container-low">
-              <tr>{["Section Name", "Semester", "Academic Year", "Capacity", "Actions"].map(h => <th key={h} className="px-4 py-3 text-left text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">{h}</th>)}</tr>
+              <tr>{["Section Name", "Semester", "Ongoing Class", "Capacity", "Actions"].map(h => <th key={h} className="px-4 py-3 text-left text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">{h}</th>)}</tr>
             </thead>
             <tbody className="divide-y divide-outline-variant">
               {initialSections.length === 0 ? <tr><td colSpan={5} className="py-16 text-center text-on-surface-variant">No sections found.</td></tr>
@@ -84,7 +84,16 @@ export function SectionsClient({ initialSections, semesters, totalPages, totalCo
                   <tr key={s.id} className="hover:bg-surface-container-low/50 transition-colors">
                     <td className="px-4 py-3 font-medium text-on-surface">{s.name}</td>
                     <td className="px-4 py-3 text-on-surface-variant">Sem {s.semester.semesterNumber} · {s.semester.program.code}</td>
-                    <td className="px-4 py-3 text-on-surface-variant">{s.semester.academicYear}</td>
+                    <td className="px-4 py-3 text-on-surface-variant">
+                      {s.teachingAssignments?.[0]?.subject?.name ? (
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          {s.teachingAssignments[0].subject.name}
+                        </span>
+                      ) : (
+                        <span className="text-on-surface-variant text-xs">No ongoing class</span>
+                      )}
+                    </td>
                     <td className="px-4 py-3"><span className="inline-flex items-center rounded-full bg-secondary-container px-3 py-1 text-xs font-semibold text-on-secondary-container">{s.capacity} students</span></td>
                     <td className="px-4 py-3"><div className="flex gap-2"><button onClick={() => openEdit(s)} className="rounded-md p-1.5 text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors"><Pencil className="h-4 w-4" /></button><button onClick={() => setDeleteItem(s)} className="rounded-md p-1.5 text-on-surface-variant hover:bg-red-50 hover:text-red-600 transition-colors"><Trash2 className="h-4 w-4" /></button></div></td>
                   </tr>

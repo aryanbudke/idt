@@ -44,16 +44,18 @@ export function UserDropdown() {
         }
       />
       <DropdownMenuContent className="w-56 rounded-md border border-outline-variant bg-surface-container-lowest text-on-surface" align="end">
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-semibold leading-none">{name}</p>
-            {email && (
-              <p className="text-xs leading-none text-on-surface-variant">
-                {email}
-              </p>
-            )}
-          </div>
-        </DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="font-normal">
+            <div className="flex flex-col space-y-1">
+              <p className="text-sm font-semibold leading-none">{name}</p>
+              {email && (
+                <p className="text-xs leading-none text-on-surface-variant">
+                  {email}
+                </p>
+              )}
+            </div>
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator className="bg-outline-variant" />
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer flex items-center gap-2 hover:bg-surface-variant">
